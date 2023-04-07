@@ -13,3 +13,7 @@ header {
     width: 85%;
     min-width: 800px;
 }
+
+.comment {
+    padding-left: 12px;
+}

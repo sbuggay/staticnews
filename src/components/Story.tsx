@@ -8,7 +8,7 @@ export default function (props: { story: IStory }) {
         <a href={url}><h1>{title}</h1></a>
         <div>
             {comments?.map(comment => {
-                return <Comment key={comment.id} comment={comment} depth={0} />
+                return <Comment key={comment.id} comment={comment} />
             })}
         </div>
     </div>;

@@ -1,14 +1,13 @@
 import { IComment } from "../Items";
 
-function Comment(props: { comment: IComment, depth: number }) {
+function Comment(props: { comment: IComment }) {
     const { text, comments, by } = props.comment;
-    const { depth } = props;
 
-    return <div style={{ marginLeft: 16 * depth }}>
+    return <div className="comment">
         <hr />
         <div>{by}</div>
         <div dangerouslySetInnerHTML={{ __html: text }} />
-        {comments?.map(comment => <Comment depth={depth + 1} key={comment.id} comment={comment} />)}
+        {comments?.map(comment => <Comment key={comment.id} comment={comment} />)}
     </div>;
 }
 
