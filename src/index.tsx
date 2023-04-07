@@ -1,6 +1,6 @@
 import * as ReactDOMServer from 'react-dom/server';
 import { fetch } from './util';
-import { writeFileSync, mkdirSync, copyFileSync } from 'fs';
+import { writeFileSync, mkdirSync, copyFileSync, readFileSync } from 'fs';
 import { IComment, IItem, IStory } from './Items';
 import { join } from 'path';
 import StoryPreview from './components/StoryPreview';
@@ -54,9 +54,9 @@ async function generate() {
 
     const index =
         <Page>
-            <>
+            <ul>
                 {stories.map(story => <StoryPreview story={story} key={story.title} />)}
-            </>
+            </ul>
         </Page>
 
     mkdirSync(outputDirectory, { recursive: true });
@@ -87,6 +87,9 @@ async function generate() {
 
     // Copy static resources
     copyFileSync('./src/styles.css', join(outputDirectory, 'styles.css'));
+
+    // Inject CSS
+    const stylesheet = readFileSync('./src/styles.css').toString();
 
     const duration = performance.now() - start;
     console.log('Total duration: ' + duration + 'ms');

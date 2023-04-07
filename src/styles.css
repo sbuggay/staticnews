@@ -1,12 +1,21 @@
+body {
+    font-size: 0.85em;
+}
+
 header {
-    color: white;
     background-color: orangered;
     padding: 4px 8px;
 }
 
+header a {
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
 #container {
     display: flex;
-    justify-items: center;
+    justify-content: center;
 }
 
 #inner {
@@ -16,4 +25,14 @@ header {
 
 .comment {
     padding-left: 12px;
+}
+
+.by {
+    color: #666;
+    padding-bottom: 8px;
+}
+
+ul {
+    line-height: 160%;
+    list-style-type: none;
 }

@@ -3,9 +3,15 @@ import { IStory } from "../Items";
 export default function (props: { story: IStory }) {
     const { id, title, descendants, url } = props.story;
 
-    const comments = `${descendants} comment${descendants !== 1 ? 's' : ''}`;
+    let comments = '';
+
+    if (descendants > 0) {
+        comments = `${descendants} comment${descendants !== 1 ? 's' : ''}`;
+    }
+
+    const link = url ? url : `/${id}`;
 
     return <li>
-        <a href={url}>{title}</a> - <a href={`${id}.html`}>{comments}</a>
+        <a href={link}>{title}</a> - <a href={`${id}.html`}>{comments}</a>
     </li>
 }

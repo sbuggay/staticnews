@@ -1,6 +1,6 @@
 function Header(props: {}) {
     return <header>
-        <a href="/">static-news</a>
+        <a href="/">Static News</a>
     </header>
 }
 
