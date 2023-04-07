@@ -5,9 +5,15 @@ function Page(props: { children: JSX.Element }) {
     return (
         <html>
             <Head />
-            <Header />
             <body>
-                {props.children}
+                <div id="container">
+                    <div id="inner">
+                        <Header />
+                        <div>
+                            {props.children}
+                        </div>
+                    </div>
+                </div>
             </body>
         </html>
     );

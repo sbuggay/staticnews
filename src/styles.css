@@ -1,0 +1,15 @@
+header {
+    color: white;
+    background-color: orangered;
+    padding: 4px 8px;
+}
+
+#container {
+    display: flex;
+    justify-items: center;
+}
+
+#inner {
+    width: 85%;
+    min-width: 800px;
+}

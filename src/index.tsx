@@ -1,6 +1,6 @@
 import * as ReactDOMServer from 'react-dom/server';
 import { fetch } from './util';
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, copyFileSync } from 'fs';
 import { IComment, IItem, IStory } from './Items';
 import { join } from 'path';
 import StoryPreview from './components/StoryPreview';
@@ -22,17 +22,33 @@ async function getItem<T>(id: number): Promise<T> {
     });
 }
 
-async function hydrateComments(parent: IItem): Promise<void> {
+interface IHyrationStats {
+    networkCount: number;
+    maxDepth: number;
+}
+
+async function hydrateComments(parent: IItem, depth: number, stats: IHyrationStats): Promise<void> {
     const { kids } = parent;
+
+    if (!kids) {
+        return;
+    }
 
     // Grab the comments
     const comments = await Promise.all(kids.map(id => getItem(id) as Promise<IComment>));
+
+    stats.networkCount += comments.length;
+    stats.maxDepth = Math.max(stats.maxDepth, depth);
+
     // Hydrate their children
-    await Promise.all(comments.map(comment => hydrateComments(comment)));
+    await Promise.all(comments.map(comment => hydrateComments(comment, depth + 1, stats)));
     parent.comments = comments;
 }
 
 async function generate() {
+
+    const start = performance.now();
+
     const storyIds = await getTopStories();
     const stories = await Promise.all(storyIds.slice(0, LIMIT).map(id => getItem(id))) as IStory[];
 
@@ -48,17 +64,32 @@ async function generate() {
     const output = ReactDOMServer.renderToStaticMarkup(index);
     writeFileSync(join(outputDirectory, 'index.html'), output);
 
+    console.log(`id\t\tvolume\t\tmax depth`);
 
     // Build a story page for each story
-    stories.forEach(async (story) => {
-        await hydrateComments(story);
+    await Promise.all(stories.map(async (story) => {
+
+        const stats: IHyrationStats = {
+            networkCount: 0,
+            maxDepth: 0
+        }
+
+        await hydrateComments(story, 0, stats);
 
         const root = <Page><Story story={story} /></Page>;
 
+        console.log(`${story.id}\t\t${stats.networkCount}\t\t${stats.maxDepth}`);
+
         const storyOutput = ReactDOMServer.renderToStaticMarkup(root);
         writeFileSync(join(outputDirectory, `${story.id}.html`), storyOutput)
-    });
+    }));
+
+
+    // Copy static resources
+    copyFileSync('./src/styles.css', join(outputDirectory, 'styles.css'));
+
+    const duration = performance.now() - start;
+    console.log('Total duration: ' + duration + 'ms');
 }
 
 generate();
-
