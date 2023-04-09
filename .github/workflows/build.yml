@@ -1,8 +1,9 @@
 name: static-news build
 run-name: ${{ github.actor }}
 on:
-  schedule:
-    - cron: '0 0 * * *'
+  # schedule:
+  #   - cron: '0 0 * * *'
+  push
 jobs:
   build:
     runs-on: ubuntu-latest
