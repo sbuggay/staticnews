@@ -2,7 +2,7 @@ name: static-news build
 run-name: ${{ github.actor }}
 on:
   schedule:
-    -cron: '0 0 * * *'
+    - cron: '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
