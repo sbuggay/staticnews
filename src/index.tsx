@@ -56,8 +56,6 @@ async function hydrateComments(parent: IItem, depth: number, stats: IHyrationSta
 }
 
 async function generate() {
-    const cache: Record<string, string> = JSON.parse(fs.readFileSync('./cache.json').toString());
-
     const start = performance.now();
 
     const stories = await getTopStories();
