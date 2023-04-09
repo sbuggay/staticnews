@@ -14,8 +14,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set Git config
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "Github Actions"
+          git config --local user.email "sbuggay@users.noreply.github.com"
+          git config --local user.name "${{ env.CI_COMMIT_AUTHOR }}"
       - name: Merge master back to dev
         run: |
           git fetch --unshallow
