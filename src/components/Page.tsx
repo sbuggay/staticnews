@@ -9,7 +9,7 @@ function Page(props: { children: JSX.Element }) {
                 <div id="container">
                     <div id="inner">
                         <Header />
-                        <div>
+                        <div id="content">
                             {props.children}
                         </div>
                     </div>

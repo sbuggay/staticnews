@@ -1,11 +1,14 @@
 export type ItemType = 'story' | 'comment';
 
 export interface IItem {
-    by: string;
     id: number;
-    kids: number[];
-    time: number;
+    deleted: boolean;
     type: ItemType;
+    by: string;
+    time: number;
+    dead: boolean;
+    kids: number[];
+    score: number;
 
     comments?: IComment[];
 }
@@ -13,11 +16,12 @@ export interface IItem {
 export interface IComment extends IItem {
     parent: number;
     text: string;
+
+    depth: number;
 }
 
 export interface IStory extends IItem {
     descendants: number;
-    score: number;
     title: string;
     url: string;
 }

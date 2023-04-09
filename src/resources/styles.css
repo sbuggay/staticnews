@@ -1,0 +1,92 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 0.85em;
+}
+
+header {
+    background-color: orangered;
+    padding: 4px 8px;
+}
+
+header a {
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+header a + a {
+    padding-left: 10px;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+}
+
+#inner {
+    width: 85%;
+    min-width: 800px;
+    background-color: #f6f6ef;
+}
+
+#content {
+    padding: 16px;
+}
+
+.c .c {
+    padding-left: 40px;
+}
+
+.c .controls > * {
+    color: #666;
+    padding-left: 4px;
+    padding-bottom: 8px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    line-height: 160%;
+    list-style-type: none;
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]~.children {
+    height: 0;
+    transition: height .2s ease-out;
+    overflow-y: hidden;
+}
+
+input[type="checkbox"]:checked~.children {
+    transform-origin: top;
+    height: auto;
+    transition: height .2s ease-out;
+    overflow: visible;
+}
+
+input[type="checkbox"]~.controls .collapse {
+    display: none;
+}
+
+input[type="checkbox"]:checked~.controls .collapse {
+    display: initial;
+}
+
+input[type="checkbox"]~.controls .expand {
+    display: initial;
+}
+
+input[type="checkbox"]:checked~.controls .expand {
+    display: none;
+}

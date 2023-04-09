@@ -1,15 +1,29 @@
 import { IComment } from "../Items";
 
 function Comment(props: { comment: IComment }) {
-    const { text, comments, by } = props.comment;
+    const { id, text, comments, by, dead, deleted, score, parent, depth } = props.comment;
 
-    if (!text) return null;
+    if (!text || dead || deleted) return null;
 
-    return <div className="comment">
-        <hr />
-        <div className="by">{by}</div>
-        <div dangerouslySetInnerHTML={{ __html: text }} />
-        {comments?.map(comment => <Comment key={comment.id} comment={comment} />)}
+    return <div id={`${id}`} className="c">
+        <input defaultChecked type="checkbox" id={`c-${id}`}></input>
+        <div className="controls">
+            <span className="by">{by}</span>
+            <span>|</span>
+            {(depth > 0) && (
+                <>
+                    <a href={`#${parent}`}>parent</a>
+                </>
+            )}
+            <label className="collapse" htmlFor={`c-${id}`}>[-]</label>
+            <label className="expand" htmlFor={`c-${id}`}>[+]</label>
+        </div>
+        <br />
+        <div className="children">
+            <div dangerouslySetInnerHTML={{ __html: text }} />
+            <br />
+            {comments?.map(comment => <Comment key={comment.id} comment={comment} />)}
+        </div>
     </div>;
 }
 

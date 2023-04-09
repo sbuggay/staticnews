@@ -12,6 +12,9 @@ export default function (props: { story: IStory }) {
     const link = url ? url : `/${id}`;
 
     return <li>
-        <a href={link}>{title}</a> - <a href={`${id}.html`}>{comments}</a>
+        <span>
+            <a href={link}>{title}</a>
+        </span>
+        {comments && <span> - <a href={`${id}.html`}>{comments}</a></span>}
     </li>
 }
