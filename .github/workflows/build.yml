@@ -1,27 +1,25 @@
-name: static-news build
+name: static-news Update prod
 run-name: ${{ github.actor }}
 on:
-  schedule:
-    - cron: '0 0 * * *'
+  # schedule:
+  #   - cron: '0 0 * * *'
+  push
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      deployments: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm i
-      - run: npm run build
-      - run: echo "Complete"
-      - name: Publish
-        uses: cloudflare/pages-action@1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: staticnews
-          directory: build
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set Git config
+        run: |
+          git config --local user.email "sbuggay@users.noreply.github.com"
+          git config --local user.name "${{ env.CI_COMMIT_AUTHOR }}"
+      - name: Merge master back to dev
+        run: |
+          git fetch --unshallow
+          git checkout prod
+          git pull
+          git merge --no-ff master -m "Auto-merge master"
+          git push
