@@ -21,7 +21,6 @@ jobs:
           projectName: staticnews
           directory: build
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-        id: publish
       - name: Outputs
         run: |
           echo "ID: ${{ steps.publish.outputs.id }}"
