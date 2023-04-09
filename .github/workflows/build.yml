@@ -1,25 +1,18 @@
-name: static-news Update prod
+name: static-news Merge master into prod
 run-name: ${{ github.actor }}
 on:
-  # schedule:
-  #   - cron: '0 0 * * *'
-  push
+  schedule:
+    - cron: '0 0 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
+    permissions: write-all
     steps:
-      - uses: actions/checkout@v3
-      - name: Set Git config
-        run: |
-          git config --local user.email "sbuggay@users.noreply.github.com"
-          git config --local user.name "${{ env.CI_COMMIT_AUTHOR }}"
-      - name: Merge master back to dev
-        run: |
-          git fetch --unshallow
-          git checkout prod
-          git pull
-          git merge --no-ff master -m "Auto-merge master"
-          git push
+      - uses: actions/checkout@master
+      - name: Merge master -> prod
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: master
+          target_branch: prod
+          github_token: ${{ secrets.GITHUB_TOKEN }}
