@@ -6,16 +6,33 @@ body {
     padding: 0;
     margin: 0;
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 0.85em;
+    font-size: 12px;
 }
 
 header {
-    background-color: orangered;
+    background-color: #ff6600;
     padding: 4px 16px;
 }
 
+a {
+    color: black;
+}
+
+a:visited {
+    color: #555;
+}
+
+.controls > a {
+    text-decoration: none;
+    color: #666;
+}
+
+.controls > a:visited {
+    color: initial;
+}
+
 header a {
-    color: white;
+    color: black;
     font-size: 1.2em;
     text-decoration: none;
 }
@@ -33,6 +50,7 @@ header a + a {
     width: 85%;
     min-width: 800px;
     background-color: #f6f6ef;
+    border-bottom: 2px solid #ff6600;
 }
 
 #content {
@@ -45,7 +63,6 @@ header a + a {
 
 .c .controls {
     color: #666;
-    padding-bottom: 8px;
 }
 
 .c .controls * + * {
@@ -100,5 +117,9 @@ input[type="checkbox"]:checked~.controls .expand {
     #inner {
         width: 100%;
         min-width: 0;
+    }
+
+    .c .c {
+        padding-left: 20px;
     }
 }

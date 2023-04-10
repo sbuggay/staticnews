@@ -1,5 +1,5 @@
 import * as ReactDOMServer from 'react-dom/server';
-import { clearDirSync, fetch } from './util';
+import { fetch } from './util';
 import * as fs from 'fs';
 import { IComment, IItem, IStory } from './Items';
 import * as path from 'path';
@@ -31,11 +31,12 @@ interface IHyrationStats {
     maxDepth: number;
 }
 
-async function hydrateComments(parent: IItem, depth: number, stats: IHyrationStats): Promise<void> {
+async function hydrateComments(parent: IItem, depth: number, stats: IHyrationStats, root: IComment | undefined = undefined): Promise<number> {
     const { kids } = parent;
 
     if (!parent || !kids) {
-        return;
+        parent.more = 1;
+        return parent.more;
     }
 
     let children = kids;
@@ -48,11 +49,20 @@ async function hydrateComments(parent: IItem, depth: number, stats: IHyrationSta
     stats.maxDepth = Math.max(stats.maxDepth, depth);
 
     // Hydrate their children
-    await Promise.all(comments.map(async (comment) => {
+    const more = await Promise.all(comments.map(async (comment) => {
         comment.depth = depth;
-        await hydrateComments(comment, depth + 1, stats);
+
+        if (!root) {
+            root = comment;
+        }
+
+        comment.root = root;
+        return await hydrateComments(comment, depth + 1, stats, root);
     }));
     parent.comments = comments;
+    parent.more = more.reduce((acc, v) => acc + v, 0) + 1;
+
+    return parent.more;
 }
 
 async function generate() {

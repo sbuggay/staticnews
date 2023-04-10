@@ -11,12 +11,14 @@ export interface IItem {
     score: number;
 
     comments?: IComment[];
+    more: number;
 }
 
 export interface IComment extends IItem {
     parent: number;
     text: string;
 
+    root?: IComment;
     depth: number;
 }
 
