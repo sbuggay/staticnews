@@ -4,7 +4,7 @@ html {
 
 body {
     padding: 0;
-    margin: 0;
+    margin: 8px 0;
     font-family: Verdana, Geneva, sans-serif;
     font-size: 12px;
 }
@@ -12,6 +12,24 @@ body {
 header {
     background-color: #ff6600;
     padding: 4px 16px;
+}
+
+header a {
+    color: black;
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+header a:first-of-type {
+    font-weight: bold;
+}
+
+header a:visited {
+    color: black;
+}
+
+header a + a {
+    padding-left: 10px;
 }
 
 a {
@@ -31,16 +49,6 @@ a:visited {
     color: initial;
 }
 
-header a {
-    color: black;
-    font-size: 1.2em;
-    text-decoration: none;
-}
-
-header a + a {
-    padding-left: 10px;
-}
-
 #container {
     display: flex;
     justify-content: center;
@@ -55,6 +63,10 @@ header a + a {
 
 #content {
     padding: 16px;
+}
+
+#title {
+    font-size: 1.2em;
 }
 
 .c .c {
@@ -84,36 +96,36 @@ input[type="checkbox"] {
     display: none;
 }
 
-input[type="checkbox"]~.children {
+input[type="checkbox"] ~ .children {
     height: 0;
-    transition: height .2s ease-out;
+    transition: height 0.2s ease-out;
     overflow-y: hidden;
 }
 
-input[type="checkbox"]:checked~.children {
+input[type="checkbox"]:checked ~ .children {
     transform-origin: top;
     height: auto;
-    transition: height .2s ease-out;
+    transition: height 0.2s ease-out;
     overflow: visible;
 }
 
-input[type="checkbox"]~.controls .collapse {
+input[type="checkbox"] ~ .controls .collapse {
     display: none;
 }
 
-input[type="checkbox"]:checked~.controls .collapse {
+input[type="checkbox"]:checked ~ .controls .collapse {
     display: initial;
 }
 
-input[type="checkbox"]~.controls .expand {
+input[type="checkbox"] ~ .controls .expand {
     display: initial;
 }
 
-input[type="checkbox"]:checked~.controls .expand {
+input[type="checkbox"]:checked ~ .controls .expand {
     display: none;
 }
 
-@media only screen and (max-width: 750px) {
+@media screen and (max-width: 750px) {
     #inner {
         width: 100%;
         min-width: 0;

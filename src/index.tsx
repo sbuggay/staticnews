@@ -1,7 +1,7 @@
 import * as ReactDOMServer from 'react-dom/server';
-import { fetch } from './util';
+import { getItem, getTopStories } from './util';
 import * as fs from 'fs';
-import { IComment, IItem, IStory } from './Items';
+import { IComment, IItem } from './Items';
 import * as path from 'path';
 import StoryPreview from './components/StoryPreview';
 import Story from './components/Story';
@@ -12,26 +12,12 @@ const LIMIT = 30;
 const outputDirectory = './build';
 const resourceDirectory = './src/resources';
 
-async function getTopStories(limit = LIMIT): Promise<IStory[]> {
-    const ids = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json').then(res => {
-        return JSON.parse(res) as number[];
-    });
-
-    return Promise.all(ids.slice(0, limit).map(id => getItem<IStory>(id)));
-}
-
-async function getItem<T extends IItem>(id: number): Promise<T> {
-    return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(res => {
-        return JSON.parse(res) as T;
-    });
-}
-
-interface IHyrationStats {
+export interface IHyrdationStats {
     networkCount: number;
     maxDepth: number;
 }
 
-async function hydrateComments(parent: IItem, depth: number, stats: IHyrationStats, root: IComment | undefined = undefined): Promise<number> {
+async function hydrateComments(parent: IItem, depth: number, stats: IHyrdationStats, root: IComment | undefined = undefined): Promise<number> {
     const { kids } = parent;
 
     if (!parent || !kids) {
@@ -40,7 +26,7 @@ async function hydrateComments(parent: IItem, depth: number, stats: IHyrationSta
     }
 
     let children = kids;
-    children = children.slice(0, depth === 0 ? 20 : 10);
+    children = children.slice(0, depth === 0 ? 30 : 20);
 
     // Grab the comments
     const comments = await Promise.all(children.map(id => getItem(id) as Promise<IComment>));
@@ -68,7 +54,7 @@ async function hydrateComments(parent: IItem, depth: number, stats: IHyrationSta
 async function generate() {
     const start = performance.now();
 
-    const stories = await getTopStories();
+    const stories = await getTopStories(LIMIT);
 
     const index =
         <Page>
@@ -84,27 +70,30 @@ async function generate() {
 
     console.log(`id\t\tvolume\t\tmax depth`);
 
+    let totalNetworkRequests = 0;
+    let maxDepth = 0;
+
     // Build a story page for each story
     await Promise.all(stories.map(async (story) => {
 
-        const stats: IHyrationStats = {
+        const stats: IHyrdationStats = {
             networkCount: 0,
             maxDepth: 0
         }
 
-        await hydrateComments(story, 0, stats);
+        const count = await hydrateComments(story, 0, stats);
+        story.descendants = count; // Filter out unused descendants and use our traversed one
 
         const root = <Page><Story story={story} /></Page>;
 
         console.log(`${story.id}\t\t${stats.networkCount}\t\t${stats.maxDepth}`);
 
+        totalNetworkRequests += stats.networkCount;
+        maxDepth = Math.max(maxDepth, stats.maxDepth);
+
         const storyOutput = ReactDOMServer.renderToStaticMarkup(root);
         fs.writeFileSync(path.join(outputDirectory, `${story.id}.html`), storyOutput);
     }));
-
-    // Generate about page
-    const aboutPageOutput = ReactDOMServer.renderToStaticMarkup(<About />);
-    fs.writeFileSync(path.join(outputDirectory, `about.html`), aboutPageOutput);
 
     // Copy static resources
     fs.copyFileSync(path.join(resourceDirectory, 'styles.css'), path.join(outputDirectory, 'styles.css'));
@@ -112,6 +101,14 @@ async function generate() {
     const duration = performance.now() - start;
     console.log('Total duration: ' + duration + 'ms');
 
+    // Generate about page
+    const aboutPageOutput = ReactDOMServer.renderToStaticMarkup(<About stats={{
+        timestamp: new Date(),
+        totalNetworkRequests,
+        maxDepth,
+        duration: Math.round(duration)
+    }} />);
+    fs.writeFileSync(path.join(outputDirectory, `about.html`), aboutPageOutput);
 }
 
 generate();

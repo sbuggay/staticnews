@@ -7,9 +7,8 @@ export default function (props: { story: IStory }) {
     const hostname = url ? new URL(url).hostname : null;
 
     return <div>
-        <div className="title">
-            <a href={url}>{title}</a>
-            {hostname ?? (<a href={hostname!}>{hostname}</a>)}
+        <div id="title">
+            <a href={url}>{title}</a>&nbsp;<span>{hostname && <a href={hostname!}>{hostname}</a>}</span>
         </div>
         <br />
         <div>
