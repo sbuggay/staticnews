@@ -1,5 +1,7 @@
-export default function() {
+export default function () {
+    const cacheBust = `v=${Date.now()}`;
+
     return <head>
-        <link rel="stylesheet" href="styles.css"></link>
+        <link rel="stylesheet" href={`styles.css?${cacheBust}`}></link>
     </head>
 }
