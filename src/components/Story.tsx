@@ -4,8 +4,13 @@ import { IStory } from "../Items";
 export default function (props: { story: IStory }) {
     const { title, comments, url } = props.story;
 
+    const hostname = url ? new URL(url).hostname : null;
+
     return <div>
-        <a href={url}><h2>{title}</h2></a>
+        <div id="title">
+            <a href={url}>{title}</a>&nbsp;<span>{hostname && <a href={hostname!}>{hostname}</a>}</span>
+        </div>
+        <br />
         <div>
             {comments?.map(comment => {
                 return <Comment key={comment.id} comment={comment} />
