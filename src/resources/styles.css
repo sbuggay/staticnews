@@ -69,6 +69,10 @@ a:visited {
     font-size: 1.2em;
 }
 
+.c {
+    overflow: hidden;
+}
+
 .c .c {
     padding-left: 40px;
 }
@@ -126,12 +130,16 @@ input[type="checkbox"]:checked ~ .controls .expand {
 }
 
 @media screen and (max-width: 750px) {
+    body {
+        margin: 0;
+    }
+
     #inner {
         width: 100%;
         min-width: 0;
     }
 
     .c .c {
-        padding-left: 20px;
+        padding-left: 5px;
     }
 }
