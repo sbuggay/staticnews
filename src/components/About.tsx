@@ -12,7 +12,7 @@ function About(props: { stats: IStats }) {
 
     return <Page>
         <>
-            <p>Page was built at {stats.timestamp.toLocaleString()}</p>
+            <p>Page built: {stats.timestamp.toLocaleString()}</p>
             <table>
                 <tr>
                     <td>Build time</td>
@@ -23,7 +23,7 @@ function About(props: { stats: IStats }) {
                     <td>{stats.totalNetworkRequests}</td>
                 </tr>
                 <tr>
-                    <td>Max depth</td>
+                    <td>Max comment depth</td>
                     <td>{stats.maxDepth}</td>
                 </tr>
             </table>
