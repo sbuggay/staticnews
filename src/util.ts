@@ -3,6 +3,10 @@ import * as fs from "fs";
 import * as path from "path";
 import { IComment, IItem, IStory } from "./Items";
 
+const defaultStoryLimit = 30;
+const defaultRootCommentLimit = 30;
+const defaultCommentLimit = 20;
+
 export function fetch(url: string) {
     return new Promise<string>((resolve, reject) => {
         https.get(url, (res) => {
@@ -21,7 +25,7 @@ export function fetch(url: string) {
     });
 }
 
-export async function getTopStories(limit: number): Promise<IStory[]> {
+export async function getTopStories(limit: number = defaultStoryLimit): Promise<IStory[]> {
     const ids = await fetch(
         "https://hacker-news.firebaseio.com/v0/topstories.json"
     ).then((res) => {
@@ -53,7 +57,7 @@ export async function hydrateComments(parent: IItem, depth: number, stats: IHydr
     }
 
     let children = kids;
-    children = children.slice(0, depth === 0 ? 30 : 20);
+    children = children.slice(0, depth === 0 ? defaultRootCommentLimit : defaultCommentLimit);
 
     // Grab the comments
     const comments = await Promise.all(children.map(id => getItem(id) as Promise<IComment>));

@@ -1,28 +1,25 @@
-import * as ReactDOMServer from 'react-dom/server';
 import { IHydrationStats, getTopStories, hydrateComments } from './util';
 import * as fs from 'fs';
 import * as path from 'path';
-import StoryPreview from './components/StoryPreview';
-import Story from './components/Story';
-import About from './components/About';
-import { StaticPage } from './StaticPage';
+import { outputDirectory } from './pages/StaticPage';
+import { IndexPage } from './pages/IndexPage';
+import { StoryPage } from './pages/StoryPage';
+import { AboutPage } from './pages/AboutPage';
 
-const LIMIT = 30;
-const outputDirectory = './build';
 const resourceDirectory = './src/resources';
+
+function setupDist() {
+    fs.rmSync(outputDirectory, { recursive: true, force: true });
+    fs.mkdirSync(outputDirectory, { recursive: true });
+}
 
 async function generate() {
     const start = performance.now();
 
-    fs.rmSync(outputDirectory, { recursive: true, force: true });
-    fs.mkdirSync(outputDirectory, { recursive: true });
+    setupDist();
 
-    const stories = await getTopStories(LIMIT);
-
-    const index = new StaticPage(<ul>
-        {stories.map(story => <StoryPreview story={story} key={story.title} />)}
-    </ul>, path.join(outputDirectory, 'index.html'));
-
+    const stories = await getTopStories();
+    const index = new IndexPage(stories);
     index.write();
 
     console.log(`id\t\tvolume\t\tmax depth`);
@@ -45,7 +42,7 @@ async function generate() {
         totalNetworkRequests += stats.networkCount;
         maxDepth = Math.max(maxDepth, stats.maxDepth);
 
-        const storyPage = new StaticPage(<Story story={story} />, path.join(outputDirectory, `${story.id}.html`));
+        const storyPage = new StoryPage(story);
         storyPage.write();
     }));
 
@@ -55,12 +52,12 @@ async function generate() {
     const duration = performance.now() - start;
     console.log('Total duration: ' + duration + 'ms');
 
-    const aboutPage = new StaticPage(<About stats={{
+    const aboutPage = new AboutPage({
         timestamp: new Date(),
         totalNetworkRequests,
         maxDepth,
         duration: Math.round(duration)
-    }} />, path.join(outputDirectory, `about.html`));
+    });
     aboutPage.write();
 }
 
