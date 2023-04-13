@@ -37,7 +37,7 @@ a {
 }
 
 a:visited {
-    color: #555;
+    color: #888;
 }
 
 .controls > a {
@@ -63,6 +63,7 @@ a:visited {
 
 #content {
     padding: 16px;
+    margin: 12px;
 }
 
 #title {
@@ -70,15 +71,22 @@ a:visited {
 }
 
 .c {
-    overflow: hidden;
+    position: relative;
 }
 
 .c .c {
     padding-left: 40px;
 }
 
+.c .controls::before {
+    content: '•';
+    left: -12px;
+    position: absolute;
+}
+
 .c .controls {
     color: #666;
+    position: relative;
 }
 
 .c .controls * + * {
@@ -140,6 +148,6 @@ input[type="checkbox"]:checked ~ .controls .expand {
     }
 
     .c .c {
-        padding-left: 5px;
+        padding-left: 10px;
     }
 }

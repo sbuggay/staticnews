@@ -3,7 +3,7 @@ import Header from './Header';
 
 function Page(props: { children: JSX.Element }) {
     return (
-        <html>
+        <html lang="en">
             <Head />
             <body>
                 <div id="container">
