@@ -18,6 +18,8 @@ export interface IComment extends IItem {
     parent: number;
     text: string;
 
+    next?: IComment;
+    prev?: IComment;
     root?: IComment;
     depth: number;
 }

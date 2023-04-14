@@ -1,7 +1,7 @@
 import { IComment } from "../Items";
 
 function Comment(props: { comment: IComment }) {
-    const { id, text, comments, by, dead, deleted, root, parent, depth, more } = props.comment;
+    const { id, text, comments, by, dead, deleted, root, parent, depth, more, next, prev } = props.comment;
 
     if (!text || dead || deleted) return null;
 
@@ -19,6 +19,19 @@ function Comment(props: { comment: IComment }) {
             {(depth > 0) && (
                 <>
                     <a href={`#${parent}`}>parent</a>
+                    <span>|</span>
+                </>
+            )}
+            {(prev) && (
+                <>
+                    <a href={`#${prev.id}`}>prev</a>
+                    <span>|</span>
+                </>
+            )}
+            {(next) && (
+                <>
+                    <a href={`#${next.id}`}>next</a>
+                    <span>|</span>
                 </>
             )}
             <label className="collapse" htmlFor={`c-${id}`}>[-]</label>
