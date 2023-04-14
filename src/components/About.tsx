@@ -10,7 +10,7 @@ export interface IStats {
 function About(props: { stats: IStats }) {
     const { stats } = props;
 
-    return <Page>
+    return (
         <>
             <p>Page built: {stats.timestamp.toLocaleString()}</p>
             <table>
@@ -27,8 +27,7 @@ function About(props: { stats: IStats }) {
                     <td>{stats.maxDepth}</td>
                 </tr>
             </table>
-        </>
-    </Page>
+        </>);
 }
 
 export default About;
