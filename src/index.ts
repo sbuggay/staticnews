@@ -1,28 +1,21 @@
-import { IHydrationStats, getTopStories, hydrateComments } from './util';
 import * as fs from 'fs';
 import * as path from 'path';
 import { outputDirectory } from './pages/StaticPage';
 import { IndexPage } from './pages/IndexPage';
 import { StoryPage } from './pages/StoryPage';
 import { AboutPage } from './pages/AboutPage';
+import { IHydrationStats, getTopStories, hydrateComments } from './hn';
 
 const resourceDirectory = './src/resources';
-
-function setupDist() {
-    fs.rmSync(outputDirectory, { recursive: true, force: true });
-    fs.mkdirSync(outputDirectory, { recursive: true });
-}
 
 async function generate() {
     const start = performance.now();
 
-    setupDist();
+    fs.mkdirSync(outputDirectory, { recursive: true });
 
     const stories = await getTopStories();
     const index = new IndexPage(stories);
     index.write();
-
-    console.log(`id\t\tvolume\t\tmax depth`);
 
     let totalNetworkRequests = 0;
     let maxDepth = 0;
@@ -38,7 +31,6 @@ async function generate() {
         const count = await hydrateComments(story, 0, stats);
         story.descendants = count; // Filter out unused descendants and use our traversed one
 
-        console.log(`${story.id}\t\t${stats.networkCount}\t\t${stats.maxDepth}`);
         totalNetworkRequests += stats.networkCount;
         maxDepth = Math.max(maxDepth, stats.maxDepth);
 
