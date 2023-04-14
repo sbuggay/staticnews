@@ -1,15 +1,16 @@
 import Comment from "./Comment";
 import { IStory } from "../Items";
+import WrappedLinked from "./WrappedLink";
 
 export default function (props: { story: IStory }) {
-    const { title, comments, url } = props.story;
-
-    const hostname = url ? new URL(url).hostname : null;
-    const link = () => <a href={hostname!}>{hostname} </a>;
+    const { title, comments, url, by, descendants } = props.story;
 
     return <div>
         <div id="title">
-            <a href={url}>{title}</a>&nbsp;<span>{hostname && '(' + link() + ')'}</span>
+            <a href={url}>{title}</a>&nbsp;<WrappedLinked urlString={url} />
+        </div>
+        <div>
+            <span>{by}</span>{' | '}<span>{descendants} comments</span>
         </div>
         <br />
         <div>

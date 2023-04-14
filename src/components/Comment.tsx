@@ -7,7 +7,7 @@ function Comment(props: { comment: IComment }) {
 
     return <div id={`${id}`} className="c">
         <input defaultChecked type="checkbox" id={`c-${id}`}></input>
-        <div className="controls">
+        <div className="controls bullet">
             <span className="by">{by}</span>
             <span>|</span>
             {(root && depth > 1) && (
