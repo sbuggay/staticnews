@@ -92,11 +92,14 @@ a:visited {
 
 .c {
     position: relative;
-    overflow-x: hidden;
 }
 
 .c .c {
     padding-left: 40px;
+}
+
+.content {
+    overflow: hidden;
 }
 
 .bullet::before {
