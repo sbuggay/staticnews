@@ -8,6 +8,6 @@ export default function WrappedLinked(props: { urlString: string }) {
     const link = `${url.protocol}//${url.hostname}`;
 
     return <>
-        <span>(<a href={link}>{hostname}</a>)</span>
+        <span className="domain">(<a href={link}>{hostname}</a>)</span>
     </>;
 }

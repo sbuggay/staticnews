@@ -40,7 +40,7 @@ a:visited {
     color: #888;
 }
 
-.controls > a {
+.controls a, .controls a:visited {
     text-decoration: none;
     color: #666;
 }
@@ -58,14 +58,32 @@ a:visited {
 }
 
 #content {
-    padding: 16px;
-    margin: 12px;
+    padding: 16px 32px;
 }
 
-.subtext {
+.preview {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.domain, .domain a, .domain a:visited {
+    color: #666;
+    font-size: 0.85em;
+    text-decoration: none;
+}
+
+.domain a:hover {
+    text-decoration: underline;
+}
+
+.subtext, .subtext a, .subtext a:visited {
     font-size: 0.85em;
     color: #666;
     text-decoration: none;
+}
+
+.subtext a:hover {
+    text-decoration: underline;
 }
 
 #title {
@@ -84,6 +102,7 @@ a:visited {
     content: '•';
     left: -12px;
     position: absolute;
+    color: #666;
 }
 
 .controls {

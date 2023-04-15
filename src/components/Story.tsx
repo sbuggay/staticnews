@@ -9,7 +9,7 @@ export default function (props: { story: IStory }) {
         <div id="title">
             <a href={url}>{title}</a>&nbsp;<WrappedLinked urlString={url} />
         </div>
-        <div>
+        <div className="subtext">
             <span>{by}</span>{' | '}<span>{descendants} comments</span>
         </div>
         <br />

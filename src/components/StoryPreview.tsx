@@ -12,7 +12,7 @@ export default function (props: { story: IStory }) {
 
     const link = url ? url : `/${id}`;
 
-    return <div style={{ position: 'relative' }}>
+    return <div className="preview">
         <div>
             <a className="bullet" href={link}>{title}</a>&nbsp;<WrappedLinked urlString={url} />
         </div>
