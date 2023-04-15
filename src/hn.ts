@@ -48,12 +48,12 @@ export async function hydrateComments(parent: IItem, depth: number, stats: IHydr
 
     for (let i = 0; i < comments.length; i++) {
         const comment = comments[i];
+
+        // Only link previous if we aren't the first comment for a layer
         if (i > 0) {
             comment.prev = comments[i - 1];
         }
-        else if (depth > 0) {
-            comment.prev = parent as IComment;
-        }
+
         if (i < (comments.length - 1)) {
             comment.next = comments[i + 1];
         }
@@ -65,8 +65,12 @@ export async function hydrateComments(parent: IItem, depth: number, stats: IHydr
     // Hydrate their children
     const more = await Promise.all(comments.map(async (comment) => {
         comment.depth = depth;
-        comment.root = root;
-        return await hydrateComments(comment, depth + 1, stats, root);
+
+        if (root) {
+            comment.root = root;
+        }
+
+        return await hydrateComments(comment, depth + 1, stats, root ? root : comment);
     }));
 
     parent.comments = comments;
