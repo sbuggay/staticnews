@@ -6,7 +6,7 @@ body {
     padding: 0;
     margin: 8px 0;
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 header {
@@ -16,7 +16,6 @@ header {
 
 header a {
     color: black;
-    font-size: 1.2em;
     text-decoration: none;
 }
 
@@ -66,9 +65,17 @@ a:visited {
     margin-bottom: 5px;
 }
 
+.preview a {
+    text-decoration: none;
+}
+
+.preview a:hover {
+    text-decoration: underline;
+}
+
 .domain, .domain a, .domain a:visited {
     color: #666;
-    font-size: 0.85em;
+    font-size: 0.9em;
     text-decoration: none;
 }
 
@@ -77,7 +84,7 @@ a:visited {
 }
 
 .subtext, .subtext a, .subtext a:visited {
-    font-size: 0.85em;
+    font-size: 0.9em;
     color: #666;
     text-decoration: none;
 }
