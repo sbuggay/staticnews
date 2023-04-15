@@ -6,9 +6,7 @@ function Index(props: { stories: IStory[] }) {
 
     return (
         <>
-            {stories.map(story => {
-                return <StoryPreview story={story} key={story.id} />
-            })}
+            {stories.map(story => <StoryPreview story={story} key={story.id} />)}
         </>
     );
 }

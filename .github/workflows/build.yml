@@ -2,7 +2,7 @@ name: static-news Merge master into prod
 run-name: ${{ github.actor }}
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 9 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest

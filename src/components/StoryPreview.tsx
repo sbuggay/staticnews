@@ -1,7 +1,8 @@
 import { IStory } from "../Items";
+import WrappedLinked from "./WrappedLink";
 
 export default function (props: { story: IStory }) {
-    const { id, title, descendants, url } = props.story;
+    const { id, title, descendants, url, by } = props.story;
 
     let comments = '';
 
@@ -11,10 +12,12 @@ export default function (props: { story: IStory }) {
 
     const link = url ? url : `/${id}`;
 
-    return <li>
-        <span>
-            <a href={link}>{title}</a>
-        </span>
-        {comments && <span> - <a href={`${id}.html`}>{comments}</a></span>}
-    </li>
+    return <div className="preview">
+        <div>
+            <a className="bullet" href={link}>{title}</a>&nbsp;<WrappedLinked urlString={url} />
+        </div>
+        <div className="subtext">
+            {by}{comments && <>{' | '} <span><a href={`${id}.html`}>{comments}</a></span></>}
+        </div>
+    </div>
 }

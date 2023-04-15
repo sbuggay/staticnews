@@ -6,7 +6,7 @@ body {
     padding: 0;
     margin: 8px 0;
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 header {
@@ -16,7 +16,6 @@ header {
 
 header a {
     color: black;
-    font-size: 1.2em;
     text-decoration: none;
 }
 
@@ -40,13 +39,9 @@ a:visited {
     color: #888;
 }
 
-.controls > a {
+.controls a, .controls a:visited {
     text-decoration: none;
     color: #666;
-}
-
-.controls > a:visited {
-    color: initial;
 }
 
 #container {
@@ -62,8 +57,40 @@ a:visited {
 }
 
 #content {
-    padding: 16px;
-    margin: 12px;
+    padding: 16px 32px;
+}
+
+.preview {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.preview a {
+    text-decoration: none;
+}
+
+.preview a:hover {
+    text-decoration: underline;
+}
+
+.domain, .domain a, .domain a:visited {
+    color: #666;
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+.domain a:hover {
+    text-decoration: underline;
+}
+
+.subtext, .subtext a, .subtext a:visited {
+    font-size: 0.9em;
+    color: #666;
+    text-decoration: none;
+}
+
+.subtext a:hover {
+    text-decoration: underline;
 }
 
 #title {
@@ -72,24 +99,30 @@ a:visited {
 
 .c {
     position: relative;
+    overflow-x: hidden;
 }
 
 .c .c {
     padding-left: 40px;
 }
 
-.c .controls::before {
+.bullet::before {
     content: '•';
     left: -12px;
     position: absolute;
+    color: #666;
 }
 
-.c .controls {
+.controls {
     color: #666;
     position: relative;
 }
 
-.c .controls * + * {
+.controls a:hover {
+    text-decoration: underline;
+}
+
+.controls * + * {
     padding-left: 4px;
 }
 
@@ -102,6 +135,7 @@ ul {
 
 label:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 input[type="checkbox"] {
