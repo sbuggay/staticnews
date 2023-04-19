@@ -39,7 +39,8 @@ a:visited {
     color: #888;
 }
 
-.controls a, .controls a:visited {
+.controls a,
+.controls a:visited {
     text-decoration: none;
     color: #666;
 }
@@ -73,7 +74,9 @@ a:visited {
     text-decoration: underline;
 }
 
-.domain, .domain a, .domain a:visited {
+.domain,
+.domain a,
+.domain a:visited {
     color: #666;
     font-size: 0.9em;
     text-decoration: none;
@@ -83,7 +86,9 @@ a:visited {
     text-decoration: underline;
 }
 
-.subtext, .subtext a, .subtext a:visited {
+.subtext,
+.subtext a,
+.subtext a:visited {
     font-size: 0.9em;
     color: #666;
     text-decoration: none;
@@ -110,7 +115,7 @@ a:visited {
 }
 
 .bullet::before {
-    content: '•';
+    content: "•";
     left: -12px;
     position: absolute;
     color: #666;
@@ -186,5 +191,50 @@ input[type="checkbox"]:checked ~ .controls .expand {
 
     .c .c {
         padding-left: 10px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1d1f21;
+        color: white;
+    }
+
+    header {
+        background-color: #f0c674;
+    }
+
+    #inner {
+        background-color: #1d1f21;
+        border-bottom: 2px solid #f0c674;
+    }
+
+    a {
+        color: white;
+    }
+
+    .bullet::before {
+        color: #969896;
+    }
+    
+    .controls {
+        color: #969896;
+    }
+
+    .controls a,
+    .controls a:visited {
+        color: #969896;
+    }
+
+    .domain,
+    .domain a,
+    .domain a:visited {
+        color: #969896;
+    }
+
+    .subtext,
+    .subtext a,
+    .subtext a:visited {
+        color: #969896;
     }
 }

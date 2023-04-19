@@ -14,7 +14,7 @@ export default function (props: { story: IStory }) {
 
     return <div className="preview">
         <div>
-            <a className="bullet" href={link}>{title}</a>&nbsp;<WrappedLinked urlString={url} />
+            <a className="bullet" href={link}>{title}</a><span> </span><WrappedLinked urlString={url} />
         </div>
         <div className="subtext">
             {by}{comments && <>{' | '} <span><a href={`${id}.html`}>{comments}</a></span></>}
