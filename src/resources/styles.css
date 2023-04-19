@@ -158,20 +158,12 @@ input[type="checkbox"]:checked ~ .children {
     overflow: visible;
 }
 
-input[type="checkbox"] ~ .controls .collapse {
+input[type="checkbox"] ~ .controls .collapse, input[type="checkbox"]:checked ~ .controls .expand {
     display: none;
 }
 
-input[type="checkbox"]:checked ~ .controls .collapse {
+input[type="checkbox"] ~ .controls .expand, input[type="checkbox"]:checked ~ .controls .collapse {
     display: initial;
-}
-
-input[type="checkbox"] ~ .controls .expand {
-    display: initial;
-}
-
-input[type="checkbox"]:checked ~ .controls .expand {
-    display: none;
 }
 
 @media screen and (max-width: 750px) {
