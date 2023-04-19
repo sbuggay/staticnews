@@ -39,7 +39,7 @@ function Comment(props: { comment: IComment }) {
         </div>
         <br />
         <div className="children">
-            <div dangerouslySetInnerHTML={{ __html: text }} />
+            <div className="content" dangerouslySetInnerHTML={{ __html: text }} />
             <br />
             {comments?.map(comment => <Comment key={comment.id} comment={comment} />)}
         </div>
