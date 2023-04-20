@@ -53,4 +53,16 @@ async function generate() {
     aboutPage.write();
 }
 
-generate();
+function retry(func: () => any, count = 3) {
+    if (count <= 0) return;
+
+    try {
+        func();
+    }
+    catch(e) {
+        console.error(e);
+        retry(func, count - 1);
+    }
+}
+
+retry(generate, 3);
