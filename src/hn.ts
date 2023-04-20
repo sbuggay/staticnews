@@ -5,8 +5,9 @@ const defaultStoryLimit = 30;
 const defaultRootCommentLimit = 30;
 const defaultCommentLimit = 20;
 
-
-export async function getTopStories(limit: number = defaultStoryLimit): Promise<IStory[]> {
+export async function getTopStories(
+    limit: number = defaultStoryLimit
+): Promise<IStory[]> {
     const ids = await fetch(
         "https://hacker-news.firebaseio.com/v0/topstories.json"
     ).then((res) => {
@@ -29,7 +30,12 @@ export interface IHydrationStats {
     maxDepth: number;
 }
 
-export async function hydrateComments(parent: IItem, depth: number, stats: IHydrationStats, root: IComment | undefined = undefined): Promise<number> {
+export async function hydrateComments(
+    parent: IItem,
+    depth: number,
+    stats: IHydrationStats,
+    root: IComment | undefined = undefined
+): Promise<number> {
     const { kids } = parent;
 
     if (!parent || !kids) {
@@ -38,10 +44,15 @@ export async function hydrateComments(parent: IItem, depth: number, stats: IHydr
     }
 
     let children = kids;
-    children = children.slice(0, depth === 0 ? defaultRootCommentLimit : defaultCommentLimit);
+    children = children.slice(
+        0,
+        depth === 0 ? defaultRootCommentLimit : defaultCommentLimit
+    );
 
     // Grab the comments
-    const comments = await Promise.all(children.map(id => getItem(id) as Promise<IComment>));
+    const comments = await Promise.all(
+        children.map((id) => getItem(id) as Promise<IComment>)
+    );
 
     stats.networkCount += comments.length;
     stats.maxDepth = Math.max(stats.maxDepth, depth);
@@ -54,24 +65,30 @@ export async function hydrateComments(parent: IItem, depth: number, stats: IHydr
             comment.prev = comments[i - 1];
         }
 
-        if (i < (comments.length - 1)) {
+        if (i < comments.length - 1) {
             comment.next = comments[i + 1];
-        }
-        else if (depth > 0) {
+        } else if (depth > 0) {
             comment.next = (parent as IComment).next;
         }
     }
 
     // Hydrate their children
-    const more = await Promise.all(comments.map(async (comment) => {
-        comment.depth = depth;
+    const more = await Promise.all(
+        comments.map(async (comment) => {
+            comment.depth = depth;
 
-        if (root) {
-            comment.root = root;
-        }
+            if (root) {
+                comment.root = root;
+            }
 
-        return await hydrateComments(comment, depth + 1, stats, root ? root : comment);
-    }));
+            return await hydrateComments(
+                comment,
+                depth + 1,
+                stats,
+                root ? root : comment
+            );
+        })
+    );
 
     parent.comments = comments;
     parent.more = more.reduce((acc, v) => acc + v, 0) + 1;
