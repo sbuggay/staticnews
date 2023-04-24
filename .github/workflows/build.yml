@@ -1,18 +1,25 @@
-name: static-news Merge master into prod
-run-name: ${{ github.actor }}
-on:
-  schedule:
-    - cron: '0 9 * * *'
+on: [push]
+  # schedule:
+    # - cron: '0 9 * * *'
+
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      contents: read
+      deployments: write
+    name: Publish to Cloudflare Pages
     steps:
-      - uses: actions/checkout@master
-      - name: Merge master -> prod
-        uses: devmasx/merge-branch@master
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Run a build step here if your project requires
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          type: now
-          from_branch: master
-          target_branch: prod
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          apiToken: ${{ secrets.CLOUDFLARE_TOKEN}}
+          accountId: d4be413ce3030ee01b860c9729954814
+          projectName: test
+          directory: build
+          branch: main
