@@ -23,4 +23,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID}}
           projectName: staticnews
           directory: build
-          branch: main
+          branch: main # Force a production deployment
