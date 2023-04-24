@@ -20,7 +20,7 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN}}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID}}
+          accountId: d4be413ce3030ee01b860c9729954814
           projectName: staticnews
           directory: build
           branch: main # Force a production deployment
