@@ -18,8 +18,8 @@ jobs:
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_TOKEN}}
-          accountId: d4be413ce3030ee01b860c9729954814
-          projectName: test
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN}}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID}}
+          projectName: staticnews
           directory: build
           branch: main
