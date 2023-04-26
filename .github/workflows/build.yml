@@ -1,26 +1,23 @@
-on: [push]
-  # schedule:
-    # - cron: '0 9 * * *'
-
+name: Build and Deploy
+on: 
+  [push]
+#   schedule:
+#      - cron: '0 9 * * *'
+permissions:
+  contents: write
 jobs:
-  publish:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    name: Publish to Cloudflare Pages
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v3
 
-      - run: npm i
-      - run: npm run build
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          npm ci
+          npm run build
 
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN}}
-          accountId: d4be413ce3030ee01b860c9729954814
-          projectName: staticnews
-          directory: build
-          branch: main # Force a production deployment
+          folder: build # The folder the action should deploy.
