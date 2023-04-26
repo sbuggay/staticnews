@@ -1,0 +1,232 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    padding: 0;
+    margin: 8px 0;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+}
+
+header {
+    background-color: #ff6600;
+    padding: 4px 16px;
+}
+
+header a {
+    color: black;
+    text-decoration: none;
+}
+
+header a:first-of-type {
+    font-weight: bold;
+}
+
+header a:visited {
+    color: black;
+}
+
+header a + a {
+    padding-left: 10px;
+}
+
+a {
+    color: black;
+}
+
+a:visited {
+    color: #888;
+}
+
+.controls a,
+.controls a:visited {
+    text-decoration: none;
+    color: #666;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+}
+
+#inner {
+    width: 85%;
+    min-width: 800px;
+    background-color: #f6f6ef;
+    border-bottom: 2px solid #ff6600;
+}
+
+#content {
+    padding: 16px 32px;
+}
+
+.preview {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.preview a {
+    text-decoration: none;
+}
+
+.preview a:hover {
+    text-decoration: underline;
+}
+
+.domain,
+.domain a,
+.domain a:visited {
+    color: #666;
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+.domain a:hover {
+    text-decoration: underline;
+}
+
+.subtext,
+.subtext a,
+.subtext a:visited {
+    font-size: 0.9em;
+    color: #666;
+    text-decoration: none;
+}
+
+.subtext a:hover {
+    text-decoration: underline;
+}
+
+#title {
+    font-size: 1.2em;
+}
+
+.c {
+    position: relative;
+}
+
+.c .c {
+    padding-left: 40px;
+}
+
+.content {
+    overflow: hidden;
+}
+
+.bullet::before {
+    content: "•";
+    left: -12px;
+    position: absolute;
+    color: #666;
+}
+
+.controls {
+    color: #666;
+    position: relative;
+}
+
+.controls a:hover {
+    text-decoration: underline;
+}
+
+.controls * + * {
+    padding-left: 4px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    line-height: 160%;
+    list-style-type: none;
+}
+
+label:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] ~ .children {
+    height: 0;
+    transition: height 0.2s ease-out;
+    overflow-y: hidden;
+}
+
+input[type="checkbox"]:checked ~ .children {
+    transform-origin: top;
+    height: auto;
+    transition: height 0.2s ease-out;
+    overflow: visible;
+}
+
+input[type="checkbox"] ~ .controls .collapse, input[type="checkbox"]:checked ~ .controls .expand {
+    display: none;
+}
+
+input[type="checkbox"] ~ .controls .expand, input[type="checkbox"]:checked ~ .controls .collapse {
+    display: initial;
+}
+
+@media screen and (max-width: 750px) {
+    body {
+        margin: 0;
+    }
+
+    #inner {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .c .c {
+        padding-left: 10px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1d1f21;
+        color: white;
+    }
+
+    header {
+        background-color: #f0c674;
+    }
+
+    #inner {
+        background-color: #1d1f21;
+        border-bottom: 2px solid #f0c674;
+    }
+
+    a {
+        color: white;
+    }
+
+    .bullet::before {
+        color: #969896;
+    }
+    
+    .controls {
+        color: #969896;
+    }
+
+    .controls a,
+    .controls a:visited {
+        color: #969896;
+    }
+
+    .domain,
+    .domain a,
+    .domain a:visited {
+        color: #969896;
+    }
+
+    .subtext,
+    .subtext a,
+    .subtext a:visited {
+        color: #969896;
+    }
+}
