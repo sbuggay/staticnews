@@ -173,7 +173,7 @@ input[type="checkbox"] ~ .controls .expand, input[type="checkbox"]:checked ~ .co
 
 @media screen and (max-width: 750px) {
     body {
-        margin: 0 0 32px;
+        margin: 0 0 64px;
     }
 
     #inner {

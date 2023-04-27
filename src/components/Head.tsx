@@ -15,7 +15,5 @@ export default function () {
         <meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21" />
         <link rel="preload" href={`styles.css?${cacheBust}`} as="style"></link>
         <link rel="stylesheet" href={`styles.css?${cacheBust}`}></link>
-
-        <link rel="apple-touch-startup-image" href="https://png.pngtree.com/png-clipart/20210309/original/pngtree-a-squatting-tabby-cat-png-image_5803660.jpg"></link>
     </head>
 }
