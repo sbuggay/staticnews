@@ -8,8 +8,14 @@ export default function () {
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0"></meta>
-        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+        <meta name="application-name" content="Static News" />
+        <meta name="apple-mobile-web-app-title" content="Static News" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21" />
         <link rel="preload" href={`styles.css?${cacheBust}`} as="style"></link>
         <link rel="stylesheet" href={`styles.css?${cacheBust}`}></link>
+
+        <link rel="apple-touch-startup-image" href="https://png.pngtree.com/png-clipart/20210309/original/pngtree-a-squatting-tabby-cat-png-image_5803660.jpg"></link>
     </head>
 }
