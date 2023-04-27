@@ -60,6 +60,11 @@ export async function hydrateComments(
     for (let i = 0; i < comments.length; i++) {
         const comment = comments[i];
 
+        if (!comment) {
+            console.error('Missing comment on parent ' + parent.id);
+            continue;
+        };
+
         // Only link previous if we aren't the first comment for a layer
         if (i > 0) {
             comment.prev = comments[i - 1];
