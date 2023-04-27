@@ -5,6 +5,8 @@ export default function () {
         <title>Static News</title>
         <meta charSet="utf-8"></meta>
         <meta name="description" content="Static delayed Hacker News."></meta>
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0"></meta>
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
         <link rel="preload" href={`styles.css?${cacheBust}`} as="style"></link>
