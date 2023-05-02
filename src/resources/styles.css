@@ -102,6 +102,14 @@ a:visited {
     font-size: 1.2em;
 }
 
+#title a {
+    text-decoration: none;
+}
+
+#title a:hover {
+    text-decoration: underline;
+}
+
 .c {
     position: relative;
 }
