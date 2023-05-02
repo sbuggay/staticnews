@@ -53,7 +53,7 @@ export async function hydrateComments(
 
     // Grab the comments
     const comments = await Promise.all(
-        children.map((id) => getItem<IComment>(id)).filter(comment => comment !== undefined)
+        children.map((id) => getItem<IComment>(id))
     ) as IComment[];
 
     stats.networkCount += comments.length;
@@ -81,7 +81,7 @@ export async function hydrateComments(
 
     // Hydrate their children
     const more = await Promise.all(
-        comments.map(async (comment) => {
+        comments.filter(comment => !!comment).map(async (comment) => {
             comment.depth = depth;
 
             if (root) {
