@@ -142,12 +142,12 @@ a:visited {
     padding-left: 4px;
 }
 
-ul {
+/* ul {
     padding: 0;
     margin: 0;
     line-height: 160%;
     list-style-type: none;
-}
+} */
 
 label:hover {
     cursor: pointer;
@@ -177,6 +177,14 @@ input[type="checkbox"] ~ .controls .collapse, input[type="checkbox"]:checked ~ .
 
 input[type="checkbox"] ~ .controls .expand, input[type="checkbox"]:checked ~ .controls .collapse {
     display: initial;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding-right: 32px;
 }
 
 @media screen and (max-width: 750px) {
