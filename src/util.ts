@@ -7,15 +7,15 @@ export function fetch(url: string) {
         https.get(url, (res) => {
             let data: string = "";
 
-            // A chunk of data has been recieved.
             res.on("data", (chunk) => {
                 data += chunk;
             });
 
-            // The whole response has been received. Print out the result.
             res.on("end", () => {
                 resolve(data);
             });
+        }).on("error", (error) => {
+            reject(error);
         });
     });
 }

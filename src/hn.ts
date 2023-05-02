@@ -1,6 +1,7 @@
 import { IComment, IItem, IStory } from "./Items";
 import { fetch } from "./util";
 
+const baseUrl = 'https://hacker-news.firebaseio.com/v0';
 const defaultStoryLimit = 30;
 const defaultRootCommentLimit = 30;
 const defaultCommentLimit = 20;
@@ -8,21 +9,22 @@ const defaultCommentLimit = 20;
 export async function getTopStories(
     limit: number = defaultStoryLimit
 ): Promise<IStory[]> {
-    const ids = await fetch(
-        "https://hacker-news.firebaseio.com/v0/topstories.json"
-    ).then((res) => {
-        return JSON.parse(res) as number[];
-    });
-
-    return Promise.all(ids.slice(0, limit).map((id) => getItem<IStory>(id)));
+    const response = await fetch(`${baseUrl}/topstories.json`);
+    const json = JSON.parse(response) as number[];
+    const stories = await Promise.all(json.slice(0, limit).map((id) => getItem<IStory>(id)));
+    return stories.filter(story => story !== undefined) as IStory[];
 }
 
-export async function getItem<T extends IItem>(id: number): Promise<T> {
-    return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
-        (res) => {
-            return JSON.parse(res) as T;
-        }
-    );
+export async function getItem<T extends IItem>(id: number): Promise<T | undefined> {
+    try {
+        const response = await fetch(`${baseUrl}/item/${id}.json`);
+        const json = JSON.parse(response) as T;
+        return json;
+    }
+    catch (e) {
+        console.error(e);
+        return Promise.resolve(undefined);
+    }
 }
 
 export interface IHydrationStats {
@@ -51,8 +53,8 @@ export async function hydrateComments(
 
     // Grab the comments
     const comments = await Promise.all(
-        children.map((id) => getItem(id) as Promise<IComment>)
-    );
+        children.map((id) => getItem<IComment>(id)).filter(comment => comment !== undefined)
+    ) as IComment[];
 
     stats.networkCount += comments.length;
     stats.maxDepth = Math.max(stats.maxDepth, depth);
