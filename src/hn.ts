@@ -52,9 +52,12 @@ export async function hydrateComments(
     );
 
     // Grab the comments
-    const comments = await Promise.all(
+    const promisedComments = await Promise.all(
         children.map((id) => getItem<IComment>(id))
     ) as IComment[];
+
+    // Filter any empty comments
+    const comments = promisedComments.filter(comment => comment);
 
     stats.networkCount += comments.length;
     stats.maxDepth = Math.max(stats.maxDepth, depth);
@@ -81,7 +84,7 @@ export async function hydrateComments(
 
     // Hydrate their children
     const more = await Promise.all(
-        comments.filter(comment => !!comment).map(async (comment) => {
+        comments.map(async (comment) => {
             comment.depth = depth;
 
             if (root) {
