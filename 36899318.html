@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1690534870399" as="style"/><link rel="stylesheet" href="styles.css?v=1690534870399"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://www.gingerbill.org/article/2018/03/12/on-the-aesthetics-of-the-syntax-of-declarations/">On the aesthetics of the syntax of declarations (2018)</a> <span class="domain">(<a href="https://www.gingerbill.org">www.gingerbill.org</a>)</span></div><div class="subtext"><span>dsego</span> | <span>4 comments</span></div><br/><div><div id="36903686" class="c"><input type="checkbox" id="c-36903686" checked=""/><div class="controls bullet"><span class="by">mjburgess</span><span>|</span><a href="#36903956">next</a><span>|</span><label class="collapse" for="c-36903686">[-]</label><label class="expand" for="c-36903686">[2 more]</label></div><br/><div class="children"><div class="content">I&#x27;ve recently arrived at a mixed declaration, which &quot;distributes the information&quot; across the line, I think in a way which allows it to grow without being overhwelming, (which i take to be a holy grail...)<p><pre><code>  fn calc :: (x: int) =&gt; x
+
+
+  fn calc :: tidy (x: str)
+    open(str).read()
+
+
+  fn calc :: tidy heap (x: int)
+    let data: api many(int) = new array.fill(x)(x)
+
+    repeat d &lt;- data
+      print(d)
+
+
+  fn compiletime($i, $T) :: temp (xs: $T*$i)
+    let data: api many(int) = new array.from(xs)
+    let sum = xs.reduce(op(+))
+    sum
+
+  fn lotsofparam($i, $T) :: pure (
+        num: f32, 
+        xs: $T*$i, 
+        ys: api many(str), 
+        zs: api numeric
+    )
+    
+    let sum = xs.reduce(op(+))
+    return sum</code></pre></div><br/><div id="36903848" class="c"><input type="checkbox" id="c-36903848" checked=""/><div class="controls bullet"><span class="by">Filligree</span><span>|</span><a href="#36903686">parent</a><span>|</span><a href="#36903956">next</a><span>|</span><label class="collapse" for="c-36903848">[-]</label><label class="expand" for="c-36903848">[1 more]</label></div><br/><div class="children"><div class="content">Could you explain the annotations? I feel like there might be something interesting here, but I can’t read your notation.</div><br/></div></div></div></div><div id="36903956" class="c"><input type="checkbox" id="c-36903956" checked=""/><div class="controls bullet"><span class="by">fsckboy</span><span>|</span><a href="#36903686">prev</a><span>|</span><label class="collapse" for="c-36903956">[-]</label><label class="expand" for="c-36903956">[1 more]</label></div><br/><div class="children"><div class="content">I think philosophically this article should clarify the semantics of the languages, what needs to be specified in the declarations. Then talk about the syntax if there is any further need to. Languages are all about semantics; in principle there is no reason languages couldn&#x27;t offer each user his own choice of syntax.</div><br/></div></div></div></div></div></div></div></body></html>
