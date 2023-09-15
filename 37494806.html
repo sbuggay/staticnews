@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1694768464907" as="style"/><link rel="stylesheet" href="styles.css?v=1694768464907"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://matklad.github.io/2023/09/13/comparative-analysis.html">Comparative Analysis</a> <span class="domain">(<a href="https://matklad.github.io">matklad.github.io</a>)</span></div><div class="subtext"><span>todsacerdoti</span> | <span>5 comments</span></div><br/><div><div id="37520293" class="c"><input type="checkbox" id="c-37520293" checked=""/><div class="controls bullet"><span class="by">regularfry</span><span>|</span><a href="#37520155">next</a><span>|</span><label class="collapse" for="c-37520293">[-]</label><label class="expand" for="c-37520293">[1 more]</label></div><br/><div class="children"><div class="content">I would prefer, I think, to avoid `else` clauses for clarity.  This is made much easier if you have `unless` in the language. Which, yes, is just sugar.  But it&#x27;s tasty, tasty sugar.</div><br/></div></div><div id="37520155" class="c"><input type="checkbox" id="c-37520155" checked=""/><div class="controls bullet"><span class="by">Nevermark</span><span>|</span><a href="#37520293">prev</a><span>|</span><a href="#37520223">next</a><span>|</span><label class="collapse" for="c-37520155">[-]</label><label class="expand" for="c-37520155">[1 more]</label></div><br/><div class="children"><div class="content">This example is interesting, in that the suggestion for canonical &quot;&lt;&quot; (as apposed to &quot;&gt;&quot;) results in awkward code:<p><pre><code>  if (index &lt; xs.len) {
+    &#x2F;&#x2F; Not the point
+  } else {
+    &#x2F;&#x2F; The condition we wanted to do something
+  }
+</code></pre>
+Which would be fixed (still using &quot;&lt;&quot;) with a NOT operator.<p>But, I have noticed that I feel slightly irritated by the extra parens that introducing NOT operators often causes:<p><pre><code>  if (!(condition expression)) {
+    &#x2F;&#x2F; The condition we wanted to do something
+  }
+</code></pre>
+Given NOT is always a unary operation, it would be some nice sugar if &quot;if&quot; clauses didn&#x27;t require parens for &quot;notting&quot; the condition:<p><pre><code>  if !(condition expression) {
+    &#x2F;&#x2F; The condition we wanted to do something
+  }
+</code></pre>
+Or we could have &quot;ifnot&quot; clauses, to be clearer.<p><pre><code>  ifnot (condition expression) {
+    &#x2F;&#x2F; The condition we wanted to do something
+  }
+</code></pre>
+Point being, sometimes it feels easier to test for false than true, based on the variable meanings and context.<p>(All this syntax fine tuning, is at least amusing.)</div><br/></div></div><div id="37520223" class="c"><input type="checkbox" id="c-37520223" checked=""/><div class="controls bullet"><span class="by">Nevermark</span><span>|</span><a href="#37520155">prev</a><span>|</span><a href="#37519633">next</a><span>|</span><label class="collapse" for="c-37520223">[-]</label><label class="expand" for="c-37520223">[1 more]</label></div><br/><div class="children"><div class="content">I have always felt interval inclusion was overly verbose, at the expense of typing a few more characters, but also legibility.<p><pre><code>  (lo &lt;= x and x &lt;= hi)
+</code></pre>
+I would like to be able to combine these, for any number of weakly or strongly ordered values:<p><pre><code>  (lo &lt;= x &lt;= hi)
+
+  (a &lt; b &lt; c &lt; d)
+</code></pre>
+Much easier to read. Especially with the suggested canonical low-to-high comparison order consistency.</div><br/></div></div><div id="37519633" class="c"><input type="checkbox" id="c-37519633" checked=""/><div class="controls bullet"><span class="by">whirlwin</span><span>|</span><a href="#37520223">prev</a><span>|</span><label class="collapse" for="c-37519633">[-]</label><label class="expand" for="c-37519633">[1 more]</label></div><br/><div class="children"><div class="content">That it&#x27;s hard to process mentally seems like a very subjective thing. I would rather order the numbers being compared in a sensible way, relevant to the context in which the comparison exists.<p>I.e:<p>currentCar.speed &gt; Constants.MAX_SPEED<p>But again that&#x27;s also a very subjective opinion.</div><br/></div></div></div></div></div></div></div></body></html>
