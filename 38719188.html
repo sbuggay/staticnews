@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1703235655988" as="style"/><link rel="stylesheet" href="styles.css?v=1703235655988"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://inside.java/2023/12/15/switch-case-effect/">Uniform Handling of Failure in Switch</a> <span class="domain">(<a href="https://inside.java">inside.java</a>)</span></div><div class="subtext"><span>lichtenberger</span> | <span>3 comments</span></div><br/><div><div id="38720106" class="c"><input type="checkbox" id="c-38720106" checked=""/><div class="controls bullet"><span class="by">sixthDot</span><span>|</span><label class="collapse" for="c-38720106">[-]</label><label class="expand" for="c-38720106">[2 more]</label></div><br/><div class="children"><div class="content">That reminds me a problem I thought I had in STYX...<p>For a few months I had the feeling that a good switch-expression requires the bottom type... It turns out that the `assert(0)` idiom, used in a lambda, is sufficient:<p><pre><code>    var u32 a = switch b do { 
+        1    =&gt; 2, 
+        &#x2F;* ... *&#x2F;
+        else =&gt; function(): u32 =&gt; {assert(0, &quot;crash&quot;);}() 
+    }; 
+</code></pre>
+The `else` case (similar to C `default`) simply crashes the program but the type system is happy because the lambda return type is compatible.</div><br/><div id="38732019" class="c"><input type="checkbox" id="c-38732019" checked=""/><div class="controls bullet"><span class="by">lloeki</span><span>|</span><a href="#38720106">parent</a><span>|</span><label class="collapse" for="c-38732019">[-]</label><label class="expand" for="c-38732019">[1 more]</label></div><br/><div class="children"><div class="content">Makes me think of other similar cases raised by typing systems.<p>In my Ruby case this is RBS (+ Steep). A typical pattern is to use `__FILE__` or `__dir__` which are references to respectively the current file path and the current file&#x27;s dir path.<p>It&#x27;s quite frequent to see the following - highly summarised - idiom:<p><pre><code>   # in foo.rb
+   JSON.parse(File.read(File.join(__dir__, &#x27;some&#x2F;data.json&#x27;)))
+</code></pre>
+Here type checking yells at you, because the signature of `__FILE__` and `__dir__` is:<p><pre><code>   () -&gt; String | nil
+</code></pre>
+Which intuitively makes no sense at first! But then you realise that the signature is such because if you `eval` some Ruby code then neither can return a file path:<p><pre><code>   irb&gt; eval(&#x27;__dir__&#x27;)
+   =&gt; nil
+</code></pre>
+But after all this code is in a file! It can&#x27;t return `nil`! Or, can it?<p><pre><code>   irb&gt; eval(File.read(&#x27;foo.rb&#x27;))
+   (irb):1:in `join&#x27;: no implicit conversion of nil into String (TypeError)
+</code></pre>
+Ah. So maybe you <i>know</i> that your code <i>never</i> does that. So to satisfy the typing system, you do:<p><pre><code>   JSON.parse(File.read(File.join(__dir__ || some_fallback, &#x27;some&#x2F;data.json&#x27;)))
+</code></pre>
+Where `some_fallback` may be a sane value, or another way to get to the proper path, or just `raise &quot;this file is not meant to be eval&#x27;d&quot;`.<p>And well, maybe it doesn&#x27;t <i>today</i> and in the future it will†; or maybe you have some third party tooling that ends up doing just that†.<p>It feels like useless boilerplate, but in a way the typing system is totally right, and just made you make your code more robust.<p>Back to the switch case, I had a few similar situations, and for the life of me I could not figure why it was yelling at me. &quot;That should not happen. That cannot happen. These are the only types that can get through.&quot; Well, thinking it through it turns out again that it was totally right and I missed a very specific and legit case in another part, and handing that case (through either conversion, guard clause, or adding the case in switch) was completely warranted.<p>Aaaand back to TFA IIUC it seems to propose something like:<p><pre><code>   # instead of this
+   begin
+     case (parsed = parse(input))
+     when Integer then handle_int(parsed)
+     when Float then handle_float(parsed)
+       ...
+     end
+   rescue ParseError
+     ...
+   end
+
+   # or this
+   begin
+     parsed = parse(input)
+   rescue ParseError
+     ...
+   end
+
+   case parsed
+   when Integer then handle_int(parsed)
+   when Float then handle_float(parsed)
+     ...
+   end
+
+   # it suggests this, which feels very Ruby, like `def ... rescue ... end`
+   case (parsed = parse(input))
+   when Integer then handle_int(parsed)
+   when Float then handle_float(parsed)
+   rescue ParseError
+     ...
+   end
+
+   # which is actually equivalent to this, and not the first example which wraps around the whole thing, including when clauses
+   case (
+     parsed = begin
+       parse(input)
+     rescue ParseError
+       ...
+     end
+   )
+   when Integer then handle_int(parsed)
+   when Float then handle_float(parsed)
+   end
+
+   # and could optionally be written as this for clarity? or maybe if you write it first it applies to the case expression and if you write at the bottom it applies to the whole case block, and you can write both??
+   case (parsed = parse(input))
+   rescue ParseError
+     ...
+   when Integer then handle_int(parsed)
+   when Float then handle_float(parsed)
+   rescue HandlingError
+     ...
+   end
+
+   # or maybe with a new keyword if it&#x27;s not clear enough, but I find that a bit ugly
+   case (parsed = parse(input))
+   when Integer then handle_int(parsed)
+   when Float then handle_float(parsed)
+   when_rescuing ParseError
+   rescuing ParseError
+   # what else???
+   end
+</code></pre>
+Interesting!<p>† happened.</div><br/></div></div></div></div></div></div></div></div></div></body></html>
