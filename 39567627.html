@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1709370077097" as="style"/><link rel="stylesheet" href="styles.css?v=1709370077097"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://scratchdata.com/blog/building-a-ledger/">Building a Scalable Accounting Ledger</a> <span class="domain">(<a href="https://scratchdata.com">scratchdata.com</a>)</span></div><div class="subtext"><span>memset</span> | <span>3 comments</span></div><br/><div><div id="39571100" class="c"><input type="checkbox" id="c-39571100" checked=""/><div class="controls bullet"><span class="by">aryehof</span><span>|</span><a href="#39571120">next</a><span>|</span><label class="collapse" for="c-39571100">[-]</label><label class="expand" for="c-39571100">[1 more]</label></div><br/><div class="children"><div class="content">This claims 1 and -1 is confusing, then proceeds to use the confusion. Why not use the language of the problem domain?<p>The rules are unambiguous. An increase in assets are a DR, increase in liabilities a CR, in income a CR, in expenses a DR, in owners equity a CR.<p>Decreases the opposite.<p>Using 1 and -1 is nonsensical because their meaning in mathematics is fixed, while as shown by the rules above in accounting, their meaning changes.<p>So a couple of example journal entries…<p><pre><code>  Product sale for cash
+  Sales CR 100
+  Bank  DR 100
+
+  Payment of rent
+  Rent DR 50
+  Bank CR 50
+
+  Sale for cash where tax collected and owed
+  Income      CR 70
+  Tax Payable CR 30
+  Bank        DR 100
+
+  Monthly petty cash tin entry
+  Postage             DR 5
+  Accounts receivable DR 20 (loan to John)
+  Transport           DR 15 (taxi Paul)
+  Bank                CR 40
+  
+</code></pre>
+Note that your bank statement is from the banks perspective. When you put money into the bank it is a CR because it is increase in the banks liability.<p>Is this too hard to model? I suggest not?</div><br/></div></div></div></div></div></div></div></body></html>
