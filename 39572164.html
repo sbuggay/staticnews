@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1709629269954" as="style"/><link rel="stylesheet" href="styles.css?v=1709629269954"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://dmytrobaida.github.io/recursion-viewer/">Recursion Viewer</a> <span class="domain">(<a href="https://dmytrobaida.github.io">dmytrobaida.github.io</a>)</span></div><div class="subtext"><span>thunderbong</span> | <span>5 comments</span></div><br/><div><div id="39599772" class="c"><input type="checkbox" id="c-39599772" checked=""/><div class="controls bullet"><span class="by">shwestrick</span><span>|</span><a href="#39600368">next</a><span>|</span><label class="collapse" for="c-39599772">[-]</label><label class="expand" for="c-39599772">[1 more]</label></div><br/><div class="children"><div class="content">Enjoyed playing with this!<p>N-queens search is another nice recursive example. E.g. call this with nqueens(0, 5, [])<p><pre><code>    function nqueens(i:number, n:number, queens: number[][]) {
+      if (i &gt;= n) return 1;
+
+      let count = 0;
+      for (let j = 0; j &lt; n; j++) {
+
+        let is_threatened = false;
+        for (let k = 0; k &lt; queens.length; k++) {
+          let x = queens[k][0];
+          let y = queens[k][1];
+
+          if (i == x || j == y || i - j == x - y || i + j == x + y) {
+            is_threatened = true;
+            break;
+          }
+        }
+
+        if (is_threatened) continue;
+
+        count += nqueens(i+1, n, Array(Array(i,j)).concat(queens))
+      }
+
+      return count;
+    }</code></pre></div><br/></div></div><div id="39600368" class="c"><input type="checkbox" id="c-39600368" checked=""/><div class="controls bullet"><span class="by">sidcool</span><span>|</span><a href="#39599772">prev</a><span>|</span><a href="#39600136">next</a><span>|</span><label class="collapse" for="c-39600368">[-]</label><label class="expand" for="c-39600368">[1 more]</label></div><br/><div class="children"><div class="content">This is good, but a tree structure never works for me.  It has no temporal component.  Anything similar available?</div><br/></div></div><div id="39600136" class="c"><input type="checkbox" id="c-39600136" checked=""/><div class="controls bullet"><span class="by">portpecos</span><span>|</span><a href="#39600368">prev</a><span>|</span><a href="#39599841">next</a><span>|</span><label class="collapse" for="c-39600136">[-]</label><label class="expand" for="c-39600136">[1 more]</label></div><br/><div class="children"><div class="content">Adding animation would make it more engaging.</div><br/></div></div><div id="39599841" class="c"><input type="checkbox" id="c-39599841" checked=""/><div class="controls bullet"><span class="by">iamcreasy</span><span>|</span><a href="#39600136">prev</a><span>|</span><label class="collapse" for="c-39599841">[-]</label><label class="expand" for="c-39599841">[1 more]</label></div><br/><div class="children"><div class="content">This is really cool. Does anybody know one that do the same for Python?</div><br/></div></div></div></div></div></div></div></body></html>
