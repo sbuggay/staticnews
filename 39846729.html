@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1711616476172" as="style"/><link rel="stylesheet" href="styles.css?v=1711616476172"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://radiki.dev/posts/match-and-bind-patterns/">A step beyond Rust&#x27;s pattern matching</a> <span class="domain">(<a href="https://radiki.dev">radiki.dev</a>)</span></div><div class="subtext"><span>PaulHoule</span> | <span>11 comments</span></div><br/><div><div id="39848866" class="c"><input type="checkbox" id="c-39848866" checked=""/><div class="controls bullet"><span class="by">atoav</span><span>|</span><a href="#39848890">next</a><span>|</span><label class="collapse" for="c-39848866">[-]</label><label class="expand" for="c-39848866">[2 more]</label></div><br/><div class="children"><div class="content">What I really love about Rusts pattern matching is how well it integrates with the type system.<p><pre><code>    match user {
+       ImportUser{id, account: {AccountData: email, ..}, ..
+    } =&gt; println({id}: {email}),
+        _ =&gt; println(&quot;Not an ImportUser or has no mail&quot;)
+    }
+</code></pre>
+Of course this specific case could also be written with `if let`, but imagine how long this specific case would have been using the traditional conditionals.</div><br/><div id="39848980" class="c"><input type="checkbox" id="c-39848980" checked=""/><div class="controls bullet"><span class="by">bombela</span><span>|</span><a href="#39848866">parent</a><span>|</span><a href="#39848890">next</a><span>|</span><label class="collapse" for="c-39848980">[-]</label><label class="expand" for="c-39848980">[1 more]</label></div><br/><div class="children"><div class="content">I think you might have meant to match on &quot;Some(email)&quot;.</div><br/></div></div></div></div><div id="39848890" class="c"><input type="checkbox" id="c-39848890" checked=""/><div class="controls bullet"><span class="by">arijun</span><span>|</span><a href="#39848866">prev</a><span>|</span><a href="#39847505">next</a><span>|</span><label class="collapse" for="c-39848890">[-]</label><label class="expand" for="c-39848890">[1 more]</label></div><br/><div class="children"><div class="content">The case at the beginning, where we know our pattern is irrefutable but the compiler doesn&#x27;t (let (x, 2) = (1, 1+1)) ,is something the compiler could easily prove (as long as the irrefutably could be proven locally as it is here). At first, I struggled to think of why that capability would <i>ever</i> be helpful. In the end, though, I came up with this example, which can (and does) come up:<p><pre><code>  fn infallible() -&gt; Result&lt;u8, !&gt;{
+      Ok(1)
+  }
+  
+  fn match_infallible(){
+      let Ok(x) = infallible();
+  }
+</code></pre>
+The compiler here knows the `infallible` function will always return an `Ok` because of the return type. Here you could just `unwrap` the result, but what if it was inside a tuple, or something similar?</div><br/></div></div><div id="39847505" class="c"><input type="checkbox" id="c-39847505" checked=""/><div class="controls bullet"><span class="by">claytonwramsey</span><span>|</span><a href="#39848890">prev</a><span>|</span><a href="#39847444">next</a><span>|</span><label class="collapse" for="c-39847505">[-]</label><label class="expand" for="c-39847505">[1 more]</label></div><br/><div class="children"><div class="content">In Rust, let-else patterns don&#x27;t allow this, but match guards (used in `match` expressions and the `matches!` macro) can do something like this.<p><pre><code>  while matches!(iterator.next(), Some((a, b)) if a + 1 == b) {
+      println!(&quot;Hello!&quot;);
+  }
+</code></pre>
+However, using the bound values in an expression is a little harder.<p><pre><code>  while match iterator.next() {
+      Some((a, b)) if a + 1 == b =&gt; {
+          println!(&quot;{a}, {b}&quot;);
+          true
+      },
+      _ =&gt; false
+  } {}
+</code></pre>
+Since this is a well-formed transformation, it should theoretically be possible to implement this as a macro without changing the language.</div><br/></div></div><div id="39847444" class="c"><input type="checkbox" id="c-39847444" checked=""/><div class="controls bullet"><span class="by">kazinator</span><span>|</span><a href="#39847505">prev</a><span>|</span><a href="#39848524">next</a><span>|</span><label class="collapse" for="c-39847444">[-]</label><label class="expand" for="c-39847444">[1 more]</label></div><br/><div class="children"><div class="content">The problem with patterns allowed to be expressions that simply evaluate to an object to be matched is that this gets in the way of doing potentially more useful things, like predicates, so it&#x27;s kind of a waste:<p>TXR Lisp:<p><pre><code>  1&gt; (match (@a @(= (+ a 1))) &#x27;(1 3) a)
+  ** match: (@a @(= (+ a 1))) failed to match object (1 3)
+  1&gt; (match (@a @(= (+ a 1))) &#x27;(1 2) a)
+  1
+</code></pre>
+An expression is treated as a predicate. The object being matched, like 2, is inserted as a right argument into it: (= (+ a 1) &lt;obj&gt;).<p>If you try the following, you get a surprising result:<p><pre><code>  2&gt; (match (@a @(+ a 1)) &#x27;(1 3) a)
+  1
+</code></pre>
+It is more verbose, but we can do more. We don&#x27;t have to test for exact equality; e.g. @(&lt; a) will match something that is greater than the previously matched a.<p>Capture a b that is greater than previously captured a:<p><pre><code>  3&gt; (match (@a @(&lt; a @b)) &#x27;(1 3) (list a b))
+  (1 3)
+</code></pre>
+Or fail trying:<p><pre><code>  4&gt; (match (@a @(&lt; a @b)) &#x27;(1 0) (list a b))
+  ** match: (@a @(&lt; a @b)) failed to match object (1 0)
+</code></pre>
+We could treat certain functions differently; since + isn&#x27;t a relational function producing a Boolean result, equality could be inserted implicitly to generate a predicate.<p>But, rather than that hack, there is a different one: user-defined patterns. We can have @(+ a 1) as a pattern by defining + as a pattern operator:<p><pre><code>  1&gt; (defmatch + (. args) ^@(= (+ ,*args)))
+  +
+</code></pre>
+Then:<p><pre><code>  2&gt; (match (@a @(+ a 1)) &#x27;(1 2) a)
+  1
+  3&gt; (match (@a @(+ a 1)) &#x27;(1 3) a)
+  ** match: (@a @(+ a 1)) failed to match object (1 3)</code></pre></div><br/></div></div><div id="39848524" class="c"><input type="checkbox" id="c-39848524" checked=""/><div class="controls bullet"><span class="by">kccqzy</span><span>|</span><a href="#39847444">prev</a><span>|</span><a href="#39848414">next</a><span>|</span><label class="collapse" for="c-39848524">[-]</label><label class="expand" for="c-39848524">[1 more]</label></div><br/><div class="children"><div class="content">I&#x27;m not a fan of forcing a left-to-right order in the author&#x27;s proposed syntax here. Sure the example given by OP is `while let Some((a, a + 1)) = iterator.next()` but if you want to write `while let Some((b - 1, b)) = iterator.next()`?<p>This is a contrived example because you can switch expressions to make it work. Now what if you want to match a tuple where the first element is the SHA256 hash of the second?</div><br/></div></div><div id="39847419" class="c"><input type="checkbox" id="c-39847419" checked=""/><div class="controls bullet"><span class="by">armchairhacker</span><span>|</span><a href="#39848414">prev</a><span>|</span><a href="#39848107">next</a><span>|</span><label class="collapse" for="c-39847419">[-]</label><label class="expand" for="c-39847419">[1 more]</label></div><br/><div class="children"><div class="content">This looks a lot like logic programming: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Logic_programming" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Logic_programming</a></div><br/></div></div><div id="39848107" class="c"><input type="checkbox" id="c-39848107" checked=""/><div class="controls bullet"><span class="by">croemer</span><span>|</span><a href="#39847419">prev</a><span>|</span><label class="collapse" for="c-39848107">[-]</label><label class="expand" for="c-39848107">[2 more]</label></div><br/><div class="children"><div class="content">There should be no `b` here in the println, this looks like a typo:<p><pre><code>  while let Some((a, a + 1)) = iterator.next() {
+    println!(&quot;({}, {})&quot;, a, b);
+}</code></pre></div><br/><div id="39848356" class="c"><input type="checkbox" id="c-39848356" checked=""/><div class="controls bullet"><span class="by">dhruvkb</span><span>|</span><a href="#39848107">parent</a><span>|</span><label class="collapse" for="c-39848356">[-]</label><label class="expand" for="c-39848356">[1 more]</label></div><br/><div class="children"><div class="content">There&#x27;s one more.<p><pre><code>  if let (a, 2) = (1, 2) &amp;&amp;
+     let (c, 4) = (3, 4) &amp;&amp; &#x2F;&#x2F; should be b, not c
+     b == a + 2 {
+        println!(&quot;Made it, a = {}, b = {}&quot;, a, b);
+  }</code></pre></div><br/></div></div></div></div></div></div></div></div></div></body></html>
