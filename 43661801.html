@@ -1,0 +1,21 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1744707676111" as="style"/><link rel="stylesheet" href="styles.css?v=1744707676111"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://coniferproductions.com/ada/ohyes/ascii-lookup-utility/">ASCII Lookup Utility in Ada</a> <span class="domain">(<a href="https://coniferproductions.com">coniferproductions.com</a>)</span></div><div class="subtext"><span>todsacerdoti</span> | <span>3 comments</span></div><br/><div><div id="43689698" class="c"><input type="checkbox" id="c-43689698" checked=""/><div class="controls bullet"><span class="by">kqr</span><span>|</span><a href="#43689690">next</a><span>|</span><label class="collapse" for="c-43689698">[-]</label><label class="expand" for="c-43689698">[1 more]</label></div><br/><div class="children"><div class="content">&gt; A full-scale Unicode lookup utility would be great, but I haven&#x27;t found one, or even looked very hard for one.<p>Emacs! There&#x27;s probably a quicker way but interactive insert-char takes codepoint numbers and then describe-char gets all sorts of useful information.</div><br/></div></div><div id="43689690" class="c"><input type="checkbox" id="c-43689690" checked=""/><div class="controls bullet"><span class="by">kazinator</span><span>|</span><a href="#43689698">prev</a><span>|</span><label class="collapse" for="c-43689690">[-]</label><label class="expand" for="c-43689690">[1 more]</label></div><br/><div class="children"><div class="content">TXR Lisp program:<p><pre><code>  (defvarl ch-name (relate (rlist 0..32 127)
+                           &#x27;#&quot;NUL SOH STX ETX EOT ENQ ACK BEL BS \
+                              HT LF VT FF CR SO SI DLE DC1 DC2 DC3 \
+                              DC4 NAK SYN ETB CAN EM SUB ESC FS GS \
+                              RS US SPC DEL&quot;
+                           nil))
+
+  (defun print-row (ch)
+    (format t &quot;~,3d ~,02x ~,07b ~,03o ~a\n&quot;
+            ch ch ch ch (or [ch-name ch] (chr-num ch))))
+
+  (match-case *args*
+    (@(require @(or @(with (`0x@{dig #&#x2F;[\dA-Fa-f]+&#x2F;}`) base 16)
+                    @(with (`0b@{dig #&#x2F;[01]+&#x2F;}`) base 2)
+                    @(with (`0o@{dig #&#x2F;[0-7]+&#x2F;}`) base 8)
+                    @(with (`@{dig #&#x2F;\d+&#x2F;}`) base 10))
+               (let ((val (toint dig base)))
+                 (if (&lt;= 0 val 127)
+                   (print-row val)))))
+    (() [mapdo print-row 0..128])
+    (@else (put-line &quot;error in argument&quot;) (exit nil)))</code></pre></div><br/></div></div></div></div></div></div></div></body></html>
