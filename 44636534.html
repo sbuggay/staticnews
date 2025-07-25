@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1753434150616" as="style"/><link rel="stylesheet" href="styles.css?v=1753434150616"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://github.com/modernish/modernish">Modernish – A library for writing programs for POSIX-based shells and utilities</a> <span class="domain">(<a href="https://github.com">github.com</a>)</span></div><div class="subtext"><span>sundarurfriend</span> | <span>3 comments</span></div><br/><div><div id="44680018" class="c"><input type="checkbox" id="c-44680018" checked=""/><div class="controls bullet"><span class="by">lioeters</span><span>|</span><a href="#44679722">next</a><span>|</span><label class="collapse" for="c-44680018">[-]</label><label class="expand" for="c-44680018">[1 more]</label></div><br/><div class="children"><div class="content">Comparison with Bash, from <a href="https:&#x2F;&#x2F;github.com&#x2F;modernish&#x2F;modernish&#x2F;blob&#x2F;master&#x2F;EXAMPLES.md">https:&#x2F;&#x2F;github.com&#x2F;modernish&#x2F;modernish&#x2F;blob&#x2F;master&#x2F;EXAMPLES....</a><p># Plain POSIX sh<p><pre><code>    #! &#x2F;bin&#x2F;sh
+    git status &gt;&#x2F;dev&#x2F;null || exit
+    if ! git diff-index --quiet HEAD; then
+        echo &#x27;Working dir not clean&#x27; &gt;&amp;2
+        exit 1
+    fi
+
+    find . -name .git -prune \
+    -o -exec sh -c &#x27;
+        # Ask Git for latest commit&#x27;\&#x27;&#x27;s timestamp,
+        # formatted for POSIX &#x27;\&#x27;&#x27;touch -t&#x27;\&#x27;&#x27;.
+        timestamp=$(git log --format=%cd \
+          --date=format:%Y%m%d%H%M.%S \
+          -1 HEAD -- &quot;$1&quot;) || exit
+        [ -n &quot;$timestamp&quot; ] || exit
+
+        set -x
+        touch -t &quot;$timestamp&quot; &quot;$1&quot;
+    &#x27; dummy {} \;
+
+</code></pre>
+# Modernish<p><pre><code>    #! &#x2F;usr&#x2F;bin&#x2F;env modernish
+    #! use safe
+    #! use sys&#x2F;cmd&#x2F;harden
+    #! use var&#x2F;loop
+    harden git
+    harden -e &#x27;&gt;1&#x27; -f wd_is_clean \
+        git diff-index --quiet HEAD
+    harden -pt touch
+
+    git status &gt;&#x2F;dev&#x2F;null
+    wd_is_clean || exit 1 &#x27;Working dir not clean&#x27;
+
+    total=0
+    LOOP find repofile in . -name .git -prune \
+    -or -iterate; DO
+        # Ask Git for latest commit&#x27;s timestamp,
+        # formatted for POSIX &#x27;touch -t&#x27;.
+        timestamp=$(git log --format=%cd \
+          --date=format:%Y%m%d%H%M.%S \
+          -1 HEAD -- $repofile)
+        str empty $timestamp &amp;&amp; continue
+
+        # &#x27;touch&#x27; is traced by &#x27;harden -t&#x27;.
+        touch -t $timestamp $repofile
+        let &quot;total+=1&quot;
+    DONE
+    exit 0 &quot;$total timestamps restored.&quot;</code></pre></div><br/></div></div><div id="44679722" class="c"><input type="checkbox" id="c-44679722" checked=""/><div class="controls bullet"><span class="by">pimlottc</span><span>|</span><a href="#44680018">prev</a><span>|</span><label class="collapse" for="c-44679722">[-]</label><label class="expand" for="c-44679722">[1 more]</label></div><br/><div class="children"><div class="content">This could really use a short, pithy code example at the start of the readme to show what it looks like. Otherwise, you have to get pretty far into the docs to see any actual commands, or click the example link which doesn’t display well on mobile.</div><br/></div></div></div></div></div></div></div></body></html>
