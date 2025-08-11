@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1754902993015" as="style"/><link rel="stylesheet" href="styles.css?v=1754902993015"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://bernsteinbear.com/blog/compiling-a-lisp-12/">Compiling a Lisp: Lambda lifting</a> <span class="domain">(<a href="https://bernsteinbear.com">bernsteinbear.com</a>)</span></div><div class="subtext"><span>azhenley</span> | <span>11 comments</span></div><br/><div><div id="44859393" class="c"><input type="checkbox" id="c-44859393" checked=""/><div class="controls bullet"><span class="by">Jtsummers</span><span>|</span><a href="#44859422">next</a><span>|</span><label class="collapse" for="c-44859393">[-]</label><label class="expand" for="c-44859393">[5 more]</label></div><br/><div class="children"><div class="content">If you like Ghuloum&#x27;s paper, there are three fairly recent compiler books that are inspired by it:<p><a href="https:&#x2F;&#x2F;nostarch.com&#x2F;writing-c-compiler" rel="nofollow">https:&#x2F;&#x2F;nostarch.com&#x2F;writing-c-compiler</a> - <i>Writing a C Compiler</i> by Nora Sandler, language agnostic for the implementation.<p><a href="https:&#x2F;&#x2F;mitpress.mit.edu&#x2F;9780262047760&#x2F;essentials-of-compilation&#x2F;" rel="nofollow">https:&#x2F;&#x2F;mitpress.mit.edu&#x2F;9780262047760&#x2F;essentials-of-compila...</a> - <i>Essentials of Compilation</i> (using Racket) by Jeremy Siek<p><a href="https:&#x2F;&#x2F;mitpress.mit.edu&#x2F;9780262048248&#x2F;essentials-of-compilation&#x2F;" rel="nofollow">https:&#x2F;&#x2F;mitpress.mit.edu&#x2F;9780262048248&#x2F;essentials-of-compila...</a> - <i>Essentials of Compilation</i> (using Python) by Jeremy Siek<p>Those last two both have open access versions.</div><br/><div id="44859787" class="c"><input type="checkbox" id="c-44859787" checked=""/><div class="controls bullet"><span class="by">dang</span><span>|</span><a href="#44859393">parent</a><span>|</span><a href="#44860206">next</a><span>|</span><label class="collapse" for="c-44859787">[-]</label><label class="expand" for="c-44859787">[1 more]</label></div><br/><div class="children"><div class="content">The paper itself has been discussed a few times:<p><i>An Incremental Approach to Compiler Construction (2006) [pdf]</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=29123715">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=29123715</a> - Nov 2021 (10 comments)<p><i>An Incremental Approach to Compiler Construction (2006) [pdf]</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=20577660">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=20577660</a> - July 2019 (5 comments)<p><i>An Incremental Approach to Compiler Construction (2006) [pdf]</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=13207441">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=13207441</a> - Dec 2016 (19 comments)<p><i>An Incremental Approach to Compiler Construction (2006) [pdf]</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10785164">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10785164</a> - Dec 2015 (13 comments)<p><i>Writing a Compiler in 24 Small Steps [pdf]</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1652623">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1652623</a> - Sept 2010 (16 comments)<p><i>An Incremental Approach to Compiler Construction</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1408241">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1408241</a> - June 2010 (18 comments)<p>(and also in comments: <a href="https:&#x2F;&#x2F;hn.algolia.com&#x2F;?dateRange=all&amp;page=0&amp;prefix=true&amp;query=Ghuloum&amp;sort=byDate&amp;type=comment" rel="nofollow">https:&#x2F;&#x2F;hn.algolia.com&#x2F;?dateRange=all&amp;page=0&amp;prefix=true&amp;que...</a>)</div><br/></div></div><div id="44860206" class="c"><input type="checkbox" id="c-44860206" checked=""/><div class="controls bullet"><span class="by">alhazrod</span><span>|</span><a href="#44859393">parent</a><span>|</span><a href="#44859787">prev</a><span>|</span><a href="#44859422">next</a><span>|</span><label class="collapse" for="c-44860206">[-]</label><label class="expand" for="c-44860206">[3 more]</label></div><br/><div class="children"><div class="content">The <i>Essentials of Compilation (using Racket) by Jeremy Siek</i> links to this[0] which when downloaded says &quot;An Incremental Approach in Python&quot; and is in Python.<p>[0]: <a href="https:&#x2F;&#x2F;github.com&#x2F;IUCompilerCourse&#x2F;Essentials-of-Compilation&#x2F;releases&#x2F;tag&#x2F;racket-MIT-press" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;IUCompilerCourse&#x2F;Essentials-of-Compilatio...</a></div><br/><div id="44860331" class="c"><input type="checkbox" id="c-44860331" checked=""/><div class="controls bullet"><span class="by">Jtsummers</span><span>|</span><a href="#44859393">root</a><span>|</span><a href="#44860206">parent</a><span>|</span><a href="#44859422">next</a><span>|</span><label class="collapse" for="c-44860331">[-]</label><label class="expand" for="c-44860331">[2 more]</label></div><br/><div class="children"><div class="content"><a href="https:&#x2F;&#x2F;github.com&#x2F;IUCompilerCourse&#x2F;Essentials-of-Compilation&#x2F;releases&#x2F;download&#x2F;racket-october-2023&#x2F;book.pdf" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;IUCompilerCourse&#x2F;Essentials-of-Compilatio...</a></div><br/><div id="44860367" class="c"><input type="checkbox" id="c-44860367" checked=""/><div class="controls bullet"><span class="by">MangoToupe</span><span>|</span><a href="#44859393">root</a><span>|</span><a href="#44860331">parent</a><span>|</span><a href="#44859422">next</a><span>|</span><label class="collapse" for="c-44860367">[-]</label><label class="expand" for="c-44860367">[1 more]</label></div><br/><div class="children"><div class="content">My man. I appreciate you, and your kindness to me.</div><br/></div></div></div></div></div></div></div></div><div id="44859422" class="c"><input type="checkbox" id="c-44859422" checked=""/><div class="controls bullet"><span class="by">WantonQuantum</span><span>|</span><a href="#44859393">prev</a><span>|</span><a href="#44860653">next</a><span>|</span><label class="collapse" for="c-44859422">[-]</label><label class="expand" for="c-44859422">[4 more]</label></div><br/><div class="children"><div class="content">The &quot;lambda lifting&quot; seems to be referring to section 3.11 &quot;Complex Constants&quot; in the linked Ghuloum PDF:<p>Scheme’s constants are not limited to the immediate objects. Using the quote form, lists, vectors, and strings can be turned into constants as well. The formal semantics of Scheme require that quoted
+constants always evaluate to the same object. The following example must always evaluate to true:<p><pre><code>    (let ((f (lambda () (quote (1 . &quot;H&quot;)))))
+      (eq? (f) (f)))
+</code></pre>
+So, in general, we cannot transform a quoted constant into an unquoted series of constructions as the following incorrect transformation demonstrates:<p><pre><code>    (let ((f (lambda () (cons 1 (string #\H)))))
+      (eq? (f) (f)))
+</code></pre>
+One way of implementing complex constants is by lifting their construction to the top of the program. The example program can be transformed to an equivalent program containing no complex constants as follows:<p><pre><code>    (let ((tmp0 (cons 1 (string #\H))))
+      (let ((f (lambda () tmp0)))
+        (eq? (f) (f))))
+</code></pre>
+Performing this transformation before closure conversion makes the introduced temporaries occur as free variables in the enclosing lambdas. This increases the size of many closures, increasing heap
+consumption and slowing down the compiled programs. Another approach for implementing complex constants is by introducing global memory locations to hold the values of these constants. Every complex constant is assigned a label, denoting its location. All the complex constants are initialized at the start of the program. Our running example would be transformed to:<p><pre><code>    (labels ((f0 (code () () (constant-ref t1)))
+             (t1 (datum)))
+      (constant-init t1 (cons 1 (string #\H)))
+      (let ((f (closure f0)))
+        (eq? (f) (f))))
+</code></pre>
+The code generator should now be modified to handle the data labels as well as the two internal forms constant-ref and constant-init.</div><br/><div id="44859533" class="c"><input type="checkbox" id="c-44859533" checked=""/><div class="controls bullet"><span class="by">JonChesterfield</span><span>|</span><a href="#44859422">parent</a><span>|</span><a href="#44859608">next</a><span>|</span><label class="collapse" for="c-44859533">[-]</label><label class="expand" for="c-44859533">[1 more]</label></div><br/><div class="children"><div class="content">The idea is to move variables from the body of the function to the argument list and rewrite the call sites to match.<p>That decreases the size of the closure (and increases the size of the code, and of however you&#x27;re passing arguments).<p>Do it repeatedly though and you end up with no free variables, i.e. no closure to allocate. Hence the name, the lambda (closure) has been lifted (through the call tree) to the top level, where it is now a function (and not a lambda, if following the usual conflating of anonymous function with allocated closure).<p>Doesn&#x27;t work in the general case because you can&#x27;t find all the call sites.</div><br/></div></div><div id="44860377" class="c"><input type="checkbox" id="c-44860377" checked=""/><div class="controls bullet"><span class="by">MangoToupe</span><span>|</span><a href="#44859422">parent</a><span>|</span><a href="#44859608">prev</a><span>|</span><a href="#44860653">next</a><span>|</span><label class="collapse" for="c-44860377">[-]</label><label class="expand" for="c-44860377">[1 more]</label></div><br/><div class="children"><div class="content">&gt; Using the quote form, lists, vectors, and strings can be turned into constants as well.<p>So all of these forms will transformed to bss?</div><br/></div></div></div></div><div id="44860653" class="c"><input type="checkbox" id="c-44860653" checked=""/><div class="controls bullet"><span class="by">kazinator</span><span>|</span><a href="#44859422">prev</a><span>|</span><label class="collapse" for="c-44860653">[-]</label><label class="expand" for="c-44860653">[1 more]</label></div><br/><div class="children"><div class="content">In the TXR Lisp compiler, I did lambda lifiting simply: lambda expressions that don&#x27;t capture variables can move to the top via a code transformation that inserts them into a <i>load-time</i> form (very similar to ANSI Common Lisp&#x27;s <i>load-time-value</i>).<p>E.g.<p><pre><code>  (let ((fun (lambda (x) (+ x x))))
+    ...)
+</code></pre>
+That can just be turned into:<p><pre><code>  (let ((fun (load-time (lambda (x) (+ x x)))))
+    ...)
+</code></pre>
+Then the compilation strategy for load-time takes care of it. I had load-time working and debugged at the time I started thinking about optimizing lambdas in this way, so it was obvious.<p>load-time creates a kind of pseudo-constant. The compiler arranges for the enclosed expression to be evaluated just once. The object is captured and it becomes a de-facto constant after that; each time the expression is evaluated it just refers to that object.<p>At the VM level, constants are represented by D registers. The only reason D registers are writable is to support <i>load-time</i>: load time will store a value into a D register, where it becomes indistinguishable from a constant. If I were so inclined, I could put in a vm feature that will write-protect the D register file after the static time has done executing.<p>If we compile the following expression, the d0 register is initially <i>nil</i>. The d1 register holds 3, which comes from the (+ 3 x ) expression:<p><pre><code>  1&gt; (compile-toplevel &#x27;(lambda () (lambda (x) (+ 3 x))))
+  #&lt;sys:vm-desc: a32a150&gt;
+  2&gt; (disassemble *1)
+  data:
+      0: nil
+      1: 3
+  syms:
+      0: sys:b+
+  code:
+      0: 8C000009 close d0 0 4 9 1 1 nil t2
+      1: 00000400
+      2: 00010001
+      3: 00000004
+      4: 00000002
+      5: 20020003 gcall t3 0 d1 t2
+      6: 04010000
+      7: 00000002
+      8: 10000003 end t3
+      9: 8C00000E close t2 0 2 14 0 0 nil
+     10: 00000002
+     11: 00000000
+     12: 00000002
+     13: 10000400 end d0
+     14: 10000002 end t2
+  instruction count:
+      6
+  #&lt;sys:vm-desc: a32a150&gt;
+</code></pre>
+The close instruction has d0 as its destination register &quot;close d0 ...&quot;. The 9 argument in it indicates the instruction offset where to jump to after the closure is created: offset 9, where another &quot;close ...&quot; instruction is found: that represents the outer (lambda () ...)<p>We have only compiled this top-level form and not yet executed any of the code. To execute it we can call it as if it were a function, with no arguments:<p><pre><code>  3&gt; [*1]
+  #&lt;vm fun: 0 param&gt;
+</code></pre>
+It returns the outer lambda produced at instruction 9: as expected. When we dissassemble the compiled form again, register d0 is filled in, because the close instruction at 0 executed:<p><pre><code>  4&gt; (disassemble *1)
+  data:
+      0: #&lt;vm fun: 1 param&gt;
+      1: 3
+  syms:
+      0: sys:b+
+  code:
+      0: 8C000009 close d0 0 4 9 1 1 nil t2
+  [... SNIP; all same]
+
+</code></pre>
+d0 now holds a #&lt;vm fun: 1 param&gt;, which is the compiled (lambda (x) ...).  We can call the #&lt;fm fun: 0 param&gt; returned at prompt 3 to get that inner lambda:<p><pre><code>  5&gt; [*3]
+  #&lt;vm fun: 1 param&gt;
+  6&gt; [*5 4]
+  7
+</code></pre>
+We can disassemble the functions <i>3 and </i>5; we get the same assembly code, but different entry points. I.e. the lambdas reference this same VM description for their code and static data:<p><pre><code>  7&gt; (disassemble *3)   ; &lt;-- outer (lambda () ...)
+  data:
+      0: #&lt;vm fun: 1 param&gt;
+      1: 3
+  [ SNIP same disassembly ]
+      9: 8C00000E close t2 0 2 14 0 0 nil
+     10: 00000002
+     11: 00000000
+     12: 00000002
+     13: 10000400 end d0    &lt;---
+     14: 10000002 end t2
+  instruction count:
+      6
+  entry point:
+     13                     &lt;---
+  #&lt;vm fun: 0 param&gt;
+</code></pre>
+The entry point for the outer-lambda is offset 13. And that just executes &quot;end d0&quot;: terminate and return d0, which holds the compiled inner lambda.<p>If we disassemble that inner lambda:<p><pre><code>  8&gt; (disassemble *5) ; &lt;--- inner lambda (lambda (x) (+ 3 x)) 
+  data:
+      0: #&lt;vm fun: 1 param&gt;  &lt;--- also in here 
+      1: 3
+  syms:
+      0: sys:b+
+  code:
+      0: 8C000009 close d0 0 4 9 1 1 nil t2
+      1: 00000400
+      2: 00010001
+      3: 00000004
+      4: 00000002    &lt;---
+      5: 20020003 gcall t3 0 d1 t2.    &lt;-- sys:b+ 3 x
+      6: 04010000
+      7: 00000002
+      8: 10000003 end t3
+  [ SNIP ... ]
+  entry point:
+      4             &lt;---
+  #&lt;vm fun: 1 param&gt;
+</code></pre>
+The entry point is 4, referencing into the lifted lambda that got placed into d0. Entry point 4 is in part of the close instruction which indicates the parameter mapping. The word there indicates that the argument value is to be put into register t2. Function 0 is called with the t2 argument and d1 (which is 3). Function 0 is in the syms table: sys:b+, a binary add. When it returns, its value is put into t3 and execution terminates with &quot;end t3&quot;.</div><br/></div></div></div></div></div></div></div></body></html>
