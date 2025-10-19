@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1760864446660" as="style"/><link rel="stylesheet" href="styles.css?v=1760864446660"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://avohq.io/blog/breadcrumbs-rails">Adding Breadcrumbs to a Rails Application</a> <span class="domain">(<a href="https://avohq.io">avohq.io</a>)</span></div><div class="subtext"><span>flow-flow</span> | <span>5 comments</span></div><br/><div><div id="45631329" class="c"><input type="checkbox" id="c-45631329" checked=""/><div class="controls bullet"><span class="by">lixtra</span><span>|</span><a href="#45632232">next</a><span>|</span><label class="collapse" for="c-45631329">[-]</label><label class="expand" for="c-45631329">[1 more]</label></div><br/><div class="children"><div class="content">Somehow this code lacks the magic I‘m used from rails:<p><pre><code>    class BooksController &lt; ApplicationController
+    def show
+        @book = Book.find(params[:id])
+        add_breadcrumb(&quot;Home&quot;, path: root_path)
+        add_breadcrumb(&quot;Books&quot;, path: books_path)
+        add_breadcrumb(@book.title)
+      end
+    end
+</code></pre>
+Only the title is specific to the show method. Home should be set by the application controller and Books by the books controller code.</div><br/></div></div><div id="45632232" class="c"><input type="checkbox" id="c-45632232" checked=""/><div class="controls bullet"><span class="by">hakunin</span><span>|</span><a href="#45631329">prev</a><span>|</span><a href="#45632702">next</a><span>|</span><label class="collapse" for="c-45632232">[-]</label><label class="expand" for="c-45632232">[1 more]</label></div><br/><div class="children"><div class="content">Here&#x27;s my preferred approach, with breadcrumbs kept in erb views:<p>Make this view helper.<p><pre><code>    def breadcrumb(&amp;)
+      render(layout: &#x27;common&#x2F;breadcrumb&#x27;, &amp;)
+    end
+</code></pre>
+Add this partial &#x27;common&#x2F;_breadcrumb.html.erb&#x27; (do whatever html you want):<p><pre><code>    &lt;li class=&quot;breadcrumb-item&quot;&gt;
+      &lt;%= yield %&gt;
+    &lt;&#x2F;li&gt;
+</code></pre>
+Add this to your layout:<p><pre><code>    &lt;% if content_for?(:breadcrumbs) %&gt;
+      &lt;ol class=&quot;breadcrumbs&quot;&gt;
+        &lt;%= yield :breadcrumbs %&gt;
+      &lt;&#x2F;ol&gt;
+    &lt;% else %&gt;
+</code></pre>
+Then this is how you use it in your views:<p><pre><code>    &lt;% content_for :breadcrumbs do %&gt;
+      &lt;%= breadcrumb { link_to &#x27;Foo&#x27;, foo_url } %&gt;
+      &lt;%= breadcrumb { link_to &#x27;Bar&#x27;, bar_url } %&gt;
+      &lt;%= breadcrumb { &#x27;you are here&#x27; } %&gt;
+    &lt;% end %&gt;
+</code></pre>
+For minitest tests I add this helper:<p><pre><code>    module AssertBreadcrumbs
+      Crumb = Struct.new(:text, :href)
+
+      # Note: the block must have 1 argument per breadcrumb. It asserts their count.
+      def assert_breadcrumbs(&amp;blk)
+        assert_select &#x27;.breadcrumb-item&#x27;, blk.parameters.size do |items|
+          structs = items.map { |item|
+            if (link = item.css(&#x27;a&#x27;)[0])
+              Crumb.new(link.text, link[&#x27;href&#x27;])
+            else
+              Crumb.new(item.text.strip)
+            end
+          }
+
+          yield(*structs)
+        end
+      end
+    end
+</code></pre>
+Which you can use in tests like this:<p><pre><code>    assert_breadcrumbs do |item1, item2, item3|
+      assert_equal &#x27;Foo&#x27;, item1.text
+      assert_equal foo_url, item1.href
+
+      assert_equal &#x27;Bar&#x27;, item2.text
+      assert_equal bar_url, item2.href
+
+      assert_equal &#x27;you are here&#x27;, item3.text
+      assert_nil item3.href
+    end</code></pre></div><br/></div></div><div id="45632702" class="c"><input type="checkbox" id="c-45632702" checked=""/><div class="controls bullet"><span class="by">interstice</span><span>|</span><a href="#45632232">prev</a><span>|</span><label class="collapse" for="c-45632702">[-]</label><label class="expand" for="c-45632702">[2 more]</label></div><br/><div class="children"><div class="content">Idk if there’s something wrong with me but I just can’t look at tailwind classes like that and think yep that looks good to me. Reminds me of the inline php days</div><br/><div id="45632856" class="c"><input type="checkbox" id="c-45632856" checked=""/><div class="controls bullet"><span class="by">fredrikholm</span><span>|</span><a href="#45632702">parent</a><span>|</span><label class="collapse" for="c-45632856">[-]</label><label class="expand" for="c-45632856">[1 more]</label></div><br/><div class="children"><div class="content">I find the design aspect of stringing (primarily) defaults together very pleasing over the alternative of authoring ad hoc CSS&#x2F;SASS&#x2F;SCSS for every project.<p>Inlining it however, I&#x27;m with you.</div><br/></div></div></div></div></div></div></div></div></div></body></html>
