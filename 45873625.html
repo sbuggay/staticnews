@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1762765260859" as="style"/><link rel="stylesheet" href="styles.css?v=1762765260859"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://www.phoronix.com/news/Linux-6.19-Patch-Would-MS-Ext">The Linux Kernel Looks to &quot;Bite the Bullet&quot; in Enabling Microsoft C Extensions</a> <span class="domain">(<a href="https://www.phoronix.com">www.phoronix.com</a>)</span></div><div class="subtext"><span>keyle</span> | <span>5 comments</span></div><br/><div><div id="45873955" class="c"><input type="checkbox" id="c-45873955" checked=""/><div class="controls bullet"><span class="by">fuhsnn</span><span>|</span><a href="#45873721">next</a><span>|</span><label class="collapse" for="c-45873955">[-]</label><label class="expand" for="c-45873955">[1 more]</label></div><br/><div class="children"><div class="content">&gt; though some may feel the wrong way around Microsoft C behavior being permitted<p>The same extension can be enabled with `-fplan9-extensions`, might be more appealing to some!</div><br/></div></div><div id="45873721" class="c"><input type="checkbox" id="c-45873721" checked=""/><div class="controls bullet"><span class="by">unwind</span><span>|</span><a href="#45873955">prev</a><span>|</span><label class="collapse" for="c-45873721">[-]</label><label class="expand" for="c-45873721">[3 more]</label></div><br/><div class="children"><div class="content">Huh. I thought the article was vague on what exactly these extensions permit, so I&#x27;d thought I&#x27;d look up the GNU documentation. Surprisingly, it [1] was rather vague too!<p>The only concrete example is:<p><i>Accept some non-standard constructs used in Microsoft header files.<p>In C++ code, this allows member names in structures to be similar to previous types declarations.</i><p><pre><code>    typedef int UOW;
+    struct ABC {
+      UOW UOW;
+    };
+
+</code></pre>
+[1]: <a href="https:&#x2F;&#x2F;gcc.gnu.org&#x2F;onlinedocs&#x2F;gcc&#x2F;C-Dialect-Options.html#index-fms-extensions" rel="nofollow">https:&#x2F;&#x2F;gcc.gnu.org&#x2F;onlinedocs&#x2F;gcc&#x2F;C-Dialect-Options.html#in...</a></div><br/><div id="45873802" class="c"><input type="checkbox" id="c-45873802" checked=""/><div class="controls bullet"><span class="by">messe</span><span>|</span><a href="#45873721">parent</a><span>|</span><a href="#45873844">next</a><span>|</span><label class="collapse" for="c-45873802">[-]</label><label class="expand" for="c-45873802">[1 more]</label></div><br/><div class="children"><div class="content">The important one is &quot;Unnamed Structure and Union Fields&quot;[1], in particular unnamed structs and union fields without a tag.<p>ISO C11 and onward allows for this:<p><pre><code>    struct {
+      int a;
+      union {
+        int b;
+        float c;
+      };
+      int d;
+    } foo;
+</code></pre>
+In the above, you can access b as foo.b. In ISO C11, the inner struct&#x2F;union must be defined without a tag. Meaning that this is invalid:<p><pre><code>    struct {
+      int a;
+      union bar {
+        int b;
+        float c;
+      };
+      int d;
+    } foo;
+</code></pre>
+As is this:
+    union bar {
+      int b;
+      float c;
+    };<p><pre><code>    struct {
+      int a;
+      union bar;
+      int d;
+    } foo;
+</code></pre>
+-fms-extensions makes both of the above valid. You might be wondering why this is uesful. The most common use is for nicer struct embedding&#x2F;pseudo-inheritance:<p><pre><code>    struct parent {
+      int i;
+      void *p;
+    };
+
+    void parent_do_something(struct parent *p);
+
+    struct child {
+      struct parent;
+      const char *s;
+    };
+
+    struct child *c;
+    struct parent *p = (struct child *)c; &#x2F;&#x2F; valid
+    parent_do_something(p);
+    c.i++; &#x2F;&#x2F; valid
+</code></pre>
+[1]: <a href="https:&#x2F;&#x2F;gcc.gnu.org&#x2F;onlinedocs&#x2F;gcc&#x2F;Unnamed-Fields.html" rel="nofollow">https:&#x2F;&#x2F;gcc.gnu.org&#x2F;onlinedocs&#x2F;gcc&#x2F;Unnamed-Fields.html</a></div><br/></div></div><div id="45873844" class="c"><input type="checkbox" id="c-45873844" checked=""/><div class="controls bullet"><span class="by">arguflow</span><span>|</span><a href="#45873721">parent</a><span>|</span><a href="#45873802">prev</a><span>|</span><label class="collapse" for="c-45873844">[-]</label><label class="expand" for="c-45873844">[1 more]</label></div><br/><div class="children"><div class="content">A really good example of it is in this lore thread here [1]. He explains it better than me so I&#x27;ll just link it here<p>[1]: <a href="https:&#x2F;&#x2F;lore.kernel.org&#x2F;lkml&#x2F;200706301813.58435.agruen@suse.de&#x2F;" rel="nofollow">https:&#x2F;&#x2F;lore.kernel.org&#x2F;lkml&#x2F;200706301813.58435.agruen@suse....</a></div><br/></div></div></div></div></div></div></div></div></div></body></html>
