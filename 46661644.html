@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1768813526263" as="style"/><link rel="stylesheet" href="styles.css?v=1768813526263"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://austinhenley.com/blog/ladybugclock.html">Simulating the Ladybug Clock Puzzle</a> <span class="domain">(<a href="https://austinhenley.com">austinhenley.com</a>)</span></div><div class="subtext"><span>azhenley</span> | <span>6 comments</span></div><br/><div><div id="46675919" class="c"><input type="checkbox" id="c-46675919" checked=""/><div class="controls bullet"><span class="by">archargelod</span><span>|</span><a href="#46676041">next</a><span>|</span><label class="collapse" for="c-46675919">[-]</label><label class="expand" for="c-46675919">[1 more]</label></div><br/><div class="children"><div class="content">&gt; After 5000 runs, they were all 8.4-9.7%<p>This sample size is really small. I ran 100 million simulations in Nim[0] (takes around a minute). And distribution converges toward 9.09% on all positions equally:<p><pre><code>    Average turns: 65.99609065001634
+    Final position distribution:
+     4: 9.095%
+    11: 9.093%
+     7: 9.091%
+     3: 9.091%
+    10: 9.090%
+     9: 9.090%
+     1: 9.090%
+     8: 9.090%
+     2: 9.090%
+     6: 9.090%
+     5: 9.089%
+     0: 0.000%
+
+</code></pre>
+[0] - <a href="https:&#x2F;&#x2F;play.nim-lang.org&#x2F;#pasty=hwdfbsfh" rel="nofollow">https:&#x2F;&#x2F;play.nim-lang.org&#x2F;#pasty=hwdfbsfh</a> (reduced amount of runs to not abuse playground server resources)</div><br/></div></div><div id="46675774" class="c"><input type="checkbox" id="c-46675774" checked=""/><div class="controls bullet"><span class="by">ludwik</span><span>|</span><a href="#46676041">prev</a><span>|</span><label class="collapse" for="c-46675774">[-]</label><label class="expand" for="c-46675774">[3 more]</label></div><br/><div class="children"><div class="content">Shouldn&#x27;t the code say:<p><pre><code>    position = (position + direction + 1) % 12;
+</code></pre>
+Or have I misunderstood something?</div><br/><div id="46676074" class="c"><input type="checkbox" id="c-46676074" checked=""/><div class="controls bullet"><span class="by">nulptr</span><span>|</span><a href="#46675774">parent</a><span>|</span><a href="#46675805">next</a><span>|</span><label class="collapse" for="c-46676074">[-]</label><label class="expand" for="c-46676074">[1 more]</label></div><br/><div class="children"><div class="content">The +12 there is so that % works correctly (ie the number never becomes negative)</div><br/></div></div><div id="46675805" class="c"><input type="checkbox" id="c-46675805" checked=""/><div class="controls bullet"><span class="by">LiamPowell</span><span>|</span><a href="#46675774">parent</a><span>|</span><a href="#46676074">prev</a><span>|</span><label class="collapse" for="c-46675805">[-]</label><label class="expand" for="c-46675805">[1 more]</label></div><br/><div class="children"><div class="content">The +12 is to keep the number positive. The direction contains the movement so a +1 wouldn&#x27;t make sense.</div><br/></div></div></div></div></div></div></div></div></div></body></html>
