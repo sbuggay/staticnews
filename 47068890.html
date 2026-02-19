@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><title>Static News</title><meta charSet="utf-8"/><meta name="description" content="Static delayed Hacker News."/><meta name="theme-color" media="(prefers-color-scheme: light)" content="white"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1d1f21"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="application-name" content="Static News"/><meta name="apple-mobile-web-app-title" content="Static News"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="#1d1f21"/><link rel="preload" href="styles.css?v=1771492332593" as="style"/><link rel="stylesheet" href="styles.css?v=1771492332593"/></head><body><div id="container"><div id="inner"><header><a href="/">Static News</a><a href="/about">about</a></header><div id="content"><div><div id="title"><a href="https://nicolasdickenmann.com/blog/the-great-fp64-divide.html">15 years of FP64 segmentation, and why the Blackwell Ultra breaks the pattern</a> <span class="domain">(<a href="https://nicolasdickenmann.com">nicolasdickenmann.com</a>)</span></div><div class="subtext"><span>fp64enjoyer</span> | <span>38 comments</span></div><br/><div><div id="47069424" class="c"><input type="checkbox" id="c-47069424" checked=""/><div class="controls bullet"><span class="by">wtallis</span><span>|</span><a href="#47071657">next</a><span>|</span><label class="collapse" for="c-47069424">[-]</label><label class="expand" for="c-47069424">[12 more]</label></div><br/><div class="children"><div class="content">It&#x27;s amazing to step back and look at how much of NVIDIA&#x27;s success has come from unforeseen directions. For their original purpose of making <i>graphics</i> chips, the consumer vs pro divide was all about CAD support and optional OpenGL features that games didn&#x27;t use. Programmable shaders were added for the sake of graphics rendering needs, but ended up spawning the whole GPGPU concept, which NVIDIA reacted to very well with the creation and promotion of CUDA. GPUs have FP64 capabilities in the first place because back when GPGPU first started happening, it was all about traditional HPC workloads like numerical solutions to PDEs.<p>Fast forward several years, and the cryptocurrency craze drove up GPU prices for many years without even touching the floating-point capabilities. Now, FP64 is out because of ML, a field that&#x27;s almost unrecognizable compared to where it was during the first few years of CUDA&#x27;s existence.<p>NVIDIA has been <i>very</i> lucky over the course of their history, but have also done a <i>great</i> job of reacting to new workloads and use cases. But those shifts have definitely created some awkward moments where their existing strategies and roadmaps have been upturned.</div><br/><div id="47069830" class="c"><input type="checkbox" id="c-47069830" checked=""/><div class="controls bullet"><span class="by">gdiamos</span><span>|</span><a href="#47069424">parent</a><span>|</span><a href="#47069519">next</a><span>|</span><label class="collapse" for="c-47069830">[-]</label><label class="expand" for="c-47069830">[9 more]</label></div><br/><div class="children"><div class="content">Most people don&#x27;t appreciate how many dead end applications NVIDIA explored before finding deep learning. It took a very long time, and it wasn&#x27;t luck.</div><br/><div id="47070119" class="c"><input type="checkbox" id="c-47070119" checked=""/><div class="controls bullet"><span class="by">wtallis</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47069830">parent</a><span>|</span><a href="#47070576">next</a><span>|</span><label class="collapse" for="c-47070119">[-]</label><label class="expand" for="c-47070119">[3 more]</label></div><br/><div class="children"><div class="content">It was luck that a viable non-graphics application like deep learning <i>existed</i> which was well-suited to the architecture NVIDIA already had on hand. I certainly don&#x27;t mean to diminish the work NVIDIA did to build their CUDA ecosystem, but without the benefit of hindsight I think it would have been very plausible that GPU architectures would not have been amenable to any use cases that would end up dwarfing graphics itself. There are plenty of architectures in the history of computing which <i>never</i> found a killer application, let alone three or four.</div><br/><div id="47070195" class="c"><input type="checkbox" id="c-47070195" checked=""/><div class="controls bullet"><span class="by">oivey</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47070119">parent</a><span>|</span><a href="#47070576">next</a><span>|</span><label class="collapse" for="c-47070195">[-]</label><label class="expand" for="c-47070195">[2 more]</label></div><br/><div class="children"><div class="content">Even that is arguably not lucky, it just followed a non-obvious trajectory. Graphics uses a fair amount of linear algebra, so people with large scale physical modeling needs (among many) became interested. To an extent the deep learning craze kicked off because of developments in computation on GPUs enabled economical training.</div><br/><div id="47070851" class="c"><input type="checkbox" id="c-47070851" checked=""/><div class="controls bullet"><span class="by">imtringued</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47070195">parent</a><span>|</span><a href="#47070576">next</a><span>|</span><label class="collapse" for="c-47070851">[-]</label><label class="expand" for="c-47070851">[1 more]</label></div><br/><div class="children"><div class="content">Nvidia started their GPGPU adventure by acquiring a physics engine and porting it over to run on their GPUs. Supporting linear algebra operations was pretty much the goal from the start.</div><br/></div></div></div></div></div></div><div id="47070576" class="c"><input type="checkbox" id="c-47070576" checked=""/><div class="controls bullet"><span class="by">fooblaster</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47069830">parent</a><span>|</span><a href="#47070119">prev</a><span>|</span><a href="#47070135">next</a><span>|</span><label class="collapse" for="c-47070576">[-]</label><label class="expand" for="c-47070576">[4 more]</label></div><br/><div class="children"><div class="content">It was definitely luck, greg. And Nvidia didn&#x27;t invent deep learning, deep learning found nvidias investment in CUDA.</div><br/><div id="47070822" class="c"><input type="checkbox" id="c-47070822" checked=""/><div class="controls bullet"><span class="by">gdiamos</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47070576">parent</a><span>|</span><a href="#47070135">next</a><span>|</span><label class="collapse" for="c-47070822">[-]</label><label class="expand" for="c-47070822">[3 more]</label></div><br/><div class="children"><div class="content">I remember it differently. CUDA was built with the intention of finding&#x2F;enabling something like deep learning. I thought it was unrealistic too and took it on faith in people more experienced than me, until I saw deep learning work.<p>Some of the near misses I remember included bitcoin. Many of the other attempts didn&#x27;t ever see the light of day.<p>Luck in english often means success by chance rather than one&#x27;s own efforts or abilities. I don&#x27;t think that characterizes CUDA. I think it was eventual success in the face of extreme difficulty, many failures, and sacrifices. In hindsight, I&#x27;m still surprised that Jensen kept funding it as long as he did. I&#x27;ve never met a leader since who I think would have done that.</div><br/><div id="47071304" class="c"><input type="checkbox" id="c-47071304" checked=""/><div class="controls bullet"><span class="by">cherryteastain</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47070822">parent</a><span>|</span><a href="#47070135">next</a><span>|</span><label class="collapse" for="c-47071304">[-]</label><label class="expand" for="c-47071304">[2 more]</label></div><br/><div class="children"><div class="content">Nobody cared about deep learning back in 2007, when CUDA released. It wasn&#x27;t until the 2012 AlexNet milestone that deep neural nets start to become en vogue again.</div><br/><div id="47071413" class="c"><input type="checkbox" id="c-47071413" checked=""/><div class="controls bullet"><span class="by">gbin</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47071304">parent</a><span>|</span><a href="#47070135">next</a><span>|</span><label class="collapse" for="c-47071413">[-]</label><label class="expand" for="c-47071413">[1 more]</label></div><br/><div class="children"><div class="content">I <i>clearly</i> remember Cuda being made for HPC and scientific applications. They added actual operations for neural nets years after it was already a boom. Both instances were reactions, people already used graphics shaders for scientific purposes and cuda for neural nets, in both cases Nvidia was like oh cool money to be made.</div><br/></div></div></div></div></div></div></div></div><div id="47070135" class="c"><input type="checkbox" id="c-47070135" checked=""/><div class="controls bullet"><span class="by">MengerSponge</span><span>|</span><a href="#47069424">root</a><span>|</span><a href="#47069830">parent</a><span>|</span><a href="#47070576">prev</a><span>|</span><a href="#47069519">next</a><span>|</span><label class="collapse" for="c-47070135">[-]</label><label class="expand" for="c-47070135">[1 more]</label></div><br/><div class="children"><div class="content">It was luck, but that doesn&#x27;t mean they didn&#x27;t work very hard too.<p>Luck is when preparation meets opportunity.</div><br/></div></div></div></div><div id="47069519" class="c"><input type="checkbox" id="c-47069519" checked=""/><div class="controls bullet"><span class="by">rustyhancock</span><span>|</span><a href="#47069424">parent</a><span>|</span><a href="#47069830">prev</a><span>|</span><a href="#47069619">next</a><span>|</span><label class="collapse" for="c-47069519">[-]</label><label class="expand" for="c-47069519">[1 more]</label></div><br/><div class="children"><div class="content">They were also bailed out by Sega.<p>When they couldn&#x27;t deliver the console GPU they promised for the Dreamcast (the NV2), Shoichiro Irimajiri, the Sega CEO at the time let them keep the cash in exchange for stock [0].<p>Without it Nvidia would have gone bankrupt months before Riva 128 changed things.<p>Sega console arm went bust not that it mattered. But they sold the stock for about $15mn (3x).<p>Had they held it, Jensen Huang ,estimated itd be worth a trillion[1]. Obviously Sega and especially it&#x27;s console arm wasn&#x27;t really into VC but...<p>My wet dream has always been what if Sega and Nvidia stuck together and we had a Sega tegra shield instead of a Nintendo switch? Or even what if Sega licensed itself to the Steam Deck? You can tell I&#x27;m a sega fan boy but I can&#x27;t help that the Mega Drive was the first console I owned and loved!<p>[0] <a href="https:&#x2F;&#x2F;www.gamespot.com&#x2F;articles&#x2F;a-5-million-gift-from-sega-saved-nvidia&#x2F;1100-6536736&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.gamespot.com&#x2F;articles&#x2F;a-5-million-gift-from-sega...</a><p>[1] <a href="https:&#x2F;&#x2F;youtu.be&#x2F;3hptKYix4X8?t=5483&amp;si=h0sBmIiaduuJiem_" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;3hptKYix4X8?t=5483&amp;si=h0sBmIiaduuJiem_</a></div><br/></div></div><div id="47069619" class="c"><input type="checkbox" id="c-47069619" checked=""/><div class="controls bullet"><span class="by">readitalready</span><span>|</span><a href="#47069424">parent</a><span>|</span><a href="#47069519">prev</a><span>|</span><a href="#47071657">next</a><span>|</span><label class="collapse" for="c-47069619">[-]</label><label class="expand" for="c-47069619">[1 more]</label></div><br/><div class="children"><div class="content">The whole GPU history is off and being driven by finance bros as well. Everyone believes Nvidia kicked off the GPU AI craze when Ilya Sutskever cleaned up on AlexNet with an Nvidia GPU back in 2012, or when Andrew Ng and team at Stanford published their &quot;Large Scale Deep Unsupervised Learning using Graphics Processors&quot; in 2009, but in 2004, a couple of Korean researches were the first to implement neural networks on a GPU, using ATI Radeons (now AMD): <a href="https:&#x2F;&#x2F;www.sciencedirect.com&#x2F;science&#x2F;article&#x2F;abs&#x2F;pii&#x2F;S0031320304000524" rel="nofollow">https:&#x2F;&#x2F;www.sciencedirect.com&#x2F;science&#x2F;article&#x2F;abs&#x2F;pii&#x2F;S00313...</a><p>I remember ATI and Nvidia were neck-and-neck to launch the first GPUs around 2000. Just so much happening so fast.<p>I&#x27;d also say Nvidia had the benefit of AMD going after and focusing on Intel both at the server level as well as the integrated laptop processors, which was the reason they bought ATI.</div><br/></div></div></div></div><div id="47071657" class="c"><input type="checkbox" id="c-47071657" checked=""/><div class="controls bullet"><span class="by">numbers_guy</span><span>|</span><a href="#47069424">prev</a><span>|</span><a href="#47070554">next</a><span>|</span><label class="collapse" for="c-47071657">[-]</label><label class="expand" for="c-47071657">[1 more]</label></div><br/><div class="children"><div class="content">A question that has been bugging me for a while is what will NVIDIA do with its HPC business? By HPC I mean clusters intended for non-AI related workloads. Are they going to cater to them separetely, or are they going to tell them to just emulate FP64?</div><br/></div></div><div id="47070554" class="c"><input type="checkbox" id="c-47070554" checked=""/><div class="controls bullet"><span class="by">SubiculumCode</span><span>|</span><a href="#47071657">prev</a><span>|</span><a href="#47069822">next</a><span>|</span><label class="collapse" for="c-47070554">[-]</label><label class="expand" for="c-47070554">[3 more]</label></div><br/><div class="children"><div class="content">To me it is crazy that NVIDIA somehow got away with telling owners of consumer grade hardware.that they cannot be used in datacenters.</div><br/><div id="47071332" class="c"><input type="checkbox" id="c-47071332" checked=""/><div class="controls bullet"><span class="by">justincormack</span><span>|</span><a href="#47070554">parent</a><span>|</span><a href="#47069822">next</a><span>|</span><label class="collapse" for="c-47071332">[-]</label><label class="expand" for="c-47071332">[2 more]</label></div><br/><div class="children"><div class="content">My understanding is this was not enforceable in Europe, and maybe elsewhere</div><br/><div id="47071454" class="c"><input type="checkbox" id="c-47071454" checked=""/><div class="controls bullet"><span class="by">lelanthran</span><span>|</span><a href="#47070554">root</a><span>|</span><a href="#47071332">parent</a><span>|</span><a href="#47069822">next</a><span>|</span><label class="collapse" for="c-47071454">[-]</label><label class="expand" for="c-47071454">[1 more]</label></div><br/><div class="children"><div class="content">&gt; My understanding is this was not enforceable in Europe, and maybe elsewhere<p>&quot;Not enforceable&quot; just means they can&#x27;t sue you. It doesn&#x27;t mean they can&#x27;t say &quot;We won&#x27;t sell to you anymore&quot;.</div><br/></div></div></div></div></div></div><div id="47069822" class="c"><input type="checkbox" id="c-47069822" checked=""/><div class="controls bullet"><span class="by">gdiamos</span><span>|</span><a href="#47070554">prev</a><span>|</span><a href="#47069802">next</a><span>|</span><label class="collapse" for="c-47069822">[-]</label><label class="expand" for="c-47069822">[6 more]</label></div><br/><div class="children"><div class="content">I&#x27;m not sure why the article dismisses cost.<p>Let&#x27;s say X=10% of the GPU area (~75mm^2) is dedicated to FP32 SIMD units. Assume FP64 units are ~2-4x bigger. That would be 150-300mm^2, a huge amount of area that would increase the price per GPU. You may not agree with these assumptions. Feel free to change them. It is an overhead that is replicated per core. Why would gamers want to pay for any features they don&#x27;t use?<p>Not to say there isn&#x27;t market segmentation going on, but FP64 cost is higher for massively parallel processors than it was in the days of high frequency single core CPUs.</div><br/><div id="47070178" class="c"><input type="checkbox" id="c-47070178" checked=""/><div class="controls bullet"><span class="by">jcranmer</span><span>|</span><a href="#47069822">parent</a><span>|</span><a href="#47070082">next</a><span>|</span><label class="collapse" for="c-47070178">[-]</label><label class="expand" for="c-47070178">[1 more]</label></div><br/><div class="children"><div class="content">&gt; Assume FP64 units are ~2-4x bigger.<p>I&#x27;m not a hardware guy, but an explanation I&#x27;ve seen from someone who is says that it&#x27;s not much extra hardware to add to a 2×f32 FMA unit the capability to do 1×f64. You already have all of the per-bit logic, you mostly just need to add an extra control line to make a few carries propagate. So the size overhead of adding FP64 to the SIMD units is more like 10-50%, not 100-300%.</div><br/></div></div><div id="47070082" class="c"><input type="checkbox" id="c-47070082" checked=""/><div class="controls bullet"><span class="by">wtallis</span><span>|</span><a href="#47069822">parent</a><span>|</span><a href="#47070178">prev</a><span>|</span><a href="#47069842">next</a><span>|</span><label class="collapse" for="c-47070082">[-]</label><label class="expand" for="c-47070082">[1 more]</label></div><br/><div class="children"><div class="content">&gt;  Assume FP64 units are ~2-4x bigger.<p>I&#x27;m pretty sure that&#x27;s not a remotely fair assumption to make. We&#x27;ve seen architectures that can eg. do two FP32 operations or one FP64 operation with the same unit, with relatively low overhead compared to a pure FP32 architecture. That&#x27;s pretty much how all <i>integer</i> math units work, and it&#x27;s not hard to pull off for floating point. FP64 units don&#x27;t have to be—and seldom <i>have been</i>—implemented as massive single-purpose blocks of otherwise-dark silicon.<p>When the real hardware design choice is between having a reasonable 2:1 or 4:1 FP32:FP64 ratio vs having no FP64 whatsoever and designing a completely different core layout for consumer vs pro, the small overhead of having <i>some</i> FP64 capability has clearly been deemed worthwhile by the GPU makers for many generations. It&#x27;s only now that NVIDIA is so massive that we&#x27;re seeing them do five different physical implementations of &quot;Blackwell&quot; architecture variants.</div><br/></div></div><div id="47069842" class="c"><input type="checkbox" id="c-47069842" checked=""/><div class="controls bullet"><span class="by">wmf</span><span>|</span><a href="#47069822">parent</a><span>|</span><a href="#47070082">prev</a><span>|</span><a href="#47070977">next</a><span>|</span><label class="collapse" for="c-47069842">[-]</label><label class="expand" for="c-47069842">[2 more]</label></div><br/><div class="children"><div class="content"><i>Why would gamers want to pay for any features they don&#x27;t use?</i><p>Obviously they don&#x27;t want to. Now flip it around and ask why HPC people would want to force gamers to pay for something that benefits the HPC people... Suddenly the blog post makes perfect sense.</div><br/><div id="47069951" class="c"><input type="checkbox" id="c-47069951" checked=""/><div class="controls bullet"><span class="by">rustyhancock</span><span>|</span><a href="#47069822">root</a><span>|</span><a href="#47069842">parent</a><span>|</span><a href="#47070977">next</a><span>|</span><label class="collapse" for="c-47069951">[-]</label><label class="expand" for="c-47069951">[1 more]</label></div><br/><div class="children"><div class="content">Similar to when Nvidia released LHR GPUs that nerfed performance for Ethereum mining.<p>NVIDIA GeForce RTX 3060 LHR which tried to hinder mining at the bios level.<p>The point wasn&#x27;t to make the average person lose out by preventing them mining on their gaming GPU. But to make miners less inclined to buy gaming GPUs. They also released a series of crypto mining GPUs around the same time.<p>So fairly typical market segregation.<p><a href="https:&#x2F;&#x2F;videocardz.com&#x2F;newz&#x2F;nvidia-geforce-rtx-3060-anti-mining-algoritm-is-not-just-a-driver-thing-technology-could-expand-to-more-skus" rel="nofollow">https:&#x2F;&#x2F;videocardz.com&#x2F;newz&#x2F;nvidia-geforce-rtx-3060-anti-min...</a></div><br/></div></div></div></div><div id="47070977" class="c"><input type="checkbox" id="c-47070977" checked=""/><div class="controls bullet"><span class="by">thesz</span><span>|</span><a href="#47069822">parent</a><span>|</span><a href="#47069842">prev</a><span>|</span><a href="#47069802">next</a><span>|</span><label class="collapse" for="c-47070977">[-]</label><label class="expand" for="c-47070977">[1 more]</label></div><br/><div class="children"><div class="content"><p><pre><code>  &gt; Assume FP64 units are ~2-4x bigger.
+</code></pre>
+This is wrong assumption. FP64 usually uses the same circuitry as two FP32, adding not that much ((de)normalization, mostly).<p>From the top of my head, overhead is around 10% or so.<p><pre><code>  &gt; Why would gamers want to pay for any features they don&#x27;t use?
+</code></pre>
+<a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=lEBQveBCtKY" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=lEBQveBCtKY</a><p>Apparently FP80, which is even wider than FP64, is beneficial for pathfinding algorithms in games.<p>Pathfinding for hundredths of units is a task worth putting on GPU.</div><br/></div></div></div></div><div id="47069802" class="c"><input type="checkbox" id="c-47069802" checked=""/><div class="controls bullet"><span class="by">throwaway81523</span><span>|</span><a href="#47069822">prev</a><span>|</span><a href="#47069479">next</a><span>|</span><label class="collapse" for="c-47069802">[-]</label><label class="expand" for="c-47069802">[2 more]</label></div><br/><div class="children"><div class="content">No mention of the Radeon VII from 2019 where for some unfathomable reason AMD forgot about the segmentation scam and put real FP64 into a gaming GPU.  From this 2023 list, it&#x27;s still faster at FP64 than any other consumer GPU by a wide margin (enterprise GPU&#x27;s aren&#x27;t in the list).  Scroll all the way to the end.<p><a href="https:&#x2F;&#x2F;www.eatyourbytes.com&#x2F;list-of-gpus-by-processing-power-double-precision&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.eatyourbytes.com&#x2F;list-of-gpus-by-processing-powe...</a></div><br/><div id="47070458" class="c"><input type="checkbox" id="c-47070458" checked=""/><div class="controls bullet"><span class="by">Azantys</span><span>|</span><a href="#47069802">parent</a><span>|</span><a href="#47069479">next</a><span>|</span><label class="collapse" for="c-47070458">[-]</label><label class="expand" for="c-47070458">[1 more]</label></div><br/><div class="children"><div class="content">Thats because Radeon VIIs were just AMD Instinct MI50 server gpus which didn&#x27;t make the cut or were left over.</div><br/></div></div></div></div><div id="47069479" class="c"><input type="checkbox" id="c-47069479" checked=""/><div class="controls bullet"><span class="by">jjmarr</span><span>|</span><a href="#47069802">prev</a><span>|</span><a href="#47071441">next</a><span>|</span><label class="collapse" for="c-47069479">[-]</label><label class="expand" for="c-47069479">[6 more]</label></div><br/><div class="children"><div class="content">FP64 performance is limited on consumer because the US government deems it important to nuclear weapons research.<p>Past a certain threshold of FP64 throughput, your chip goes in a separate category and is subject to more regulation about who you can sell to and know-your-customer. FP32 does not matter for this threshold.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Adjusted_Peak_Performance" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Adjusted_Peak_Performance</a><p>It is not a market segmentation tactic and has been around since 2006. It&#x27;s part of the mind-numbing annual export control training I get to take.</div><br/><div id="47069958" class="c"><input type="checkbox" id="c-47069958" checked=""/><div class="controls bullet"><span class="by">fp64enjoyer</span><span>|</span><a href="#47069479">parent</a><span>|</span><a href="#47069686">next</a><span>|</span><label class="collapse" for="c-47069958">[-]</label><label class="expand" for="c-47069958">[3 more]</label></div><br/><div class="children"><div class="content">This is so interesting, especially given that it is in theory possible to emulate FP64 using FP32 operations.<p>I do think though that Nvidia generally didn&#x27;t see much need for more FP64 in consumer GPUs since they wrote in the Ampere (RTX3090) white paper: &quot;The small number of FP64 hardware units are included to ensure any programs with FP64 code operate correctly, including FP64 Tensor Core code.&quot;<p>I&#x27;ll try adding an additional graph where I plot the APP values for all consumer GPUs up to 2023 (when the export control regime changed) to see if the argument of Adjusted Peak Performance for FP64 has merit.<p>Do you happen to know though if GPUs count as vector processors or not under these regulations since the weighing factor changes depending on the definition?<p><a href="https:&#x2F;&#x2F;www.federalregister.gov&#x2F;documents&#x2F;2018&#x2F;10&#x2F;24&#x2F;2018-22163&#x2F;wassenaar-arrangement-2017-plenary-agreements-implementation" rel="nofollow">https:&#x2F;&#x2F;www.federalregister.gov&#x2F;documents&#x2F;2018&#x2F;10&#x2F;24&#x2F;2018-22...</a> 
+What I found so far is that under Note 7 it says: &quot;A ‘vector processor’ is defined as a processor with built-in instructions that perform multiple calculations on floating-point vectors (one-dimensional arrays of 64-bit or larger numbers) simultaneously, having at least 2 vector functional units and at least 8 vector registers of at least 64 elements each.&quot;<p>Nvidia GPUs have only 32 threads per warp, so I suppose they don&#x27;t count as a vector processor (which seems a bit weird but who knows)?</div><br/><div id="47070622" class="c"><input type="checkbox" id="c-47070622" checked=""/><div class="controls bullet"><span class="by">jcranmer</span><span>|</span><a href="#47069479">root</a><span>|</span><a href="#47069958">parent</a><span>|</span><a href="#47070362">next</a><span>|</span><label class="collapse" for="c-47070622">[-]</label><label class="expand" for="c-47070622">[1 more]</label></div><br/><div class="children"><div class="content">Wikipedia links to this guide to the APP, published in December 2006 (much closer to when the rule itself came out): <a href="https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20191007132037&#x2F;https:&#x2F;&#x2F;www.bis.doc.gov&#x2F;index.php&#x2F;documents&#x2F;product-guidance&#x2F;865-practioner-s-guide-to-adjusted-peak-performance&#x2F;file" rel="nofollow">https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20191007132037&#x2F;https:&#x2F;&#x2F;www.bis.d...</a>. At the end of the guide is a list of examples.<p>Only two of these examples meet the definition of vector processor, and these are very clearly classical vector processor computers, the Cray X1E and the NEC SX-8 (as in, if you&#x27;re preparing a guide on historical development of vector processing, you&#x27;re going to be explicitly including these systems or their ancestors as canonical examples of what you mean by a vector super computer!). And the definition is pretty clearly tailored to make sure that SIMD units in existing CPUs wouldn&#x27;t qualify for the definition of vector processor.<p>The interesting case to point out is the last example, a &quot;Hypothetical coprocessor-based Server&quot; which hypothetically describes something that is actually extremely similar to the result of GPGPU-based HPC systems: &quot;The
+host microprocessor is a quad-core (4 processors) chip, and the coprocessor is a specialized chip with 64 floating-point engines operating in parallel, attached to the host microprocessor through a specialized expansion bus (HyperTransport or CSI-like).&quot; This hypothetical system is <i>not</i> a &quot;vector processor,&quot; it goes on to explain.<p>From what I can find, it seems that neither NVidia nor the US government considers the GPUs to count as vector processors and thus give it the 0.3 rather than the 0.9 weight.</div><br/></div></div><div id="47070362" class="c"><input type="checkbox" id="c-47070362" checked=""/><div class="controls bullet"><span class="by">dahart</span><span>|</span><a href="#47069479">root</a><span>|</span><a href="#47069958">parent</a><span>|</span><a href="#47070622">prev</a><span>|</span><a href="#47069686">next</a><span>|</span><label class="collapse" for="c-47070362">[-]</label><label class="expand" for="c-47070362">[1 more]</label></div><br/><div class="children"><div class="content">&gt; it is in theory possible to emulate FP64 using FP32 operations<p>I’d say it’s better than theory, you can definitely use float2 pairs of fp32 floats to emulate higher precision. Quad precision using too, using float4. Here’s the code: <a href="https:&#x2F;&#x2F;andrewthall.com&#x2F;papers&#x2F;df64_qf128.pdf" rel="nofollow">https:&#x2F;&#x2F;andrewthall.com&#x2F;papers&#x2F;df64_qf128.pdf</a><p>Also note it’s easy to emulate fp64 using entirely integer instructions. (As a fun exercise, I attempted both doubles and quads in GLSL: <a href="https:&#x2F;&#x2F;www.shadertoy.com&#x2F;view&#x2F;flKSzG" rel="nofollow">https:&#x2F;&#x2F;www.shadertoy.com&#x2F;view&#x2F;flKSzG</a>)<p>While it’s relatively easy to do, these approaches are a lot slower than fp64 hardware. My code is not optimized, not ieee compliant, and not bug-free, but the emulated doubles are at least an order of magnitude slower than fp32, and the quads are two order of magnitude slower. I don’t think Andrew Thall’s df64 can achieve a 1:4 float to double perf ratio either.<p>And not sure, but I don’t think CUDA SMs are vector processors per se, and not because of the fixed warp size, but more broadly because of the design &amp; instruction set. I could be completely wrong though, and Tensor Cores totally might count as vector processors.</div><br/></div></div></div></div><div id="47069686" class="c"><input type="checkbox" id="c-47069686" checked=""/><div class="controls bullet"><span class="by">latentsea</span><span>|</span><a href="#47069479">parent</a><span>|</span><a href="#47069958">prev</a><span>|</span><a href="#47070023">next</a><span>|</span><label class="collapse" for="c-47069686">[-]</label><label class="expand" for="c-47069686">[1 more]</label></div><br/><div class="children"><div class="content">Can&#x27;t wait until they update this to also include export controls around FP8 and FP4 etc in order to combat deepfakes, and then all of a sudden not be able to buy increasingly powerful consumer GPUs.</div><br/></div></div></div></div><div id="47071441" class="c"><input type="checkbox" id="c-47071441" checked=""/><div class="controls bullet"><span class="by">juleiie</span><span>|</span><a href="#47069479">prev</a><span>|</span><a href="#47070612">next</a><span>|</span><label class="collapse" for="c-47071441">[-]</label><label class="expand" for="c-47071441">[1 more]</label></div><br/><div class="children"><div class="content">I hope for their fall. I invest in their success</div><br/></div></div><div id="47070612" class="c"><input type="checkbox" id="c-47070612" checked=""/><div class="controls bullet"><span class="by">botusaurus</span><span>|</span><a href="#47071441">prev</a><span>|</span><a href="#47070015">next</a><span>|</span><label class="collapse" for="c-47070612">[-]</label><label class="expand" for="c-47070612">[2 more]</label></div><br/><div class="children"><div class="content">this article is so dumb. NVIDIA delivered what the market wanted - gamers dont need FP64, they dont waste silicon on it. now enterprise doesnt want FP64 anymore and they are reducing silicon for it too<p>weird way to frame delivering exactly what the consumer wants as a big market segmentation fuck the user conspiracy</div><br/><div id="47070790" class="c"><input type="checkbox" id="c-47070790" checked=""/><div class="controls bullet"><span class="by">wtallis</span><span>|</span><a href="#47070612">parent</a><span>|</span><a href="#47070015">next</a><span>|</span><label class="collapse" for="c-47070790">[-]</label><label class="expand" for="c-47070790">[1 more]</label></div><br/><div class="children"><div class="content">Your framing is what&#x27;s backwards. NVIDIA <i>artificially</i> nerfed FP64 for a long time before they started making multiple specialized variants of their architectures. It&#x27;s not a conspiracy theory; it&#x27;s historical fact that they shipped the <i>same die</i> with drastically different levels of FP64 capability. In a very real way, consumers were paying for transistors they couldn&#x27;t use, subsidizing the pro parts.</div><br/></div></div></div></div><div id="47070839" class="c"><input type="checkbox" id="c-47070839" checked=""/><div class="controls bullet"><span class="by">benreesman</span><span>|</span><a href="#47070025">prev</a><span>|</span><label class="collapse" for="c-47070839">[-]</label><label class="expand" for="c-47070839">[2 more]</label></div><br/><div class="children"><div class="content">## 1. Myelin Compiler Structure<p>Myelin is TensorRT&#x27;s internal graph compiler. Source tree structure:<p>```
+&#x2F;nvidia&#x2F;gpgpu&#x2F;MachineLearning&#x2F;myelin&#x2F;src&#x2F;
+├── api_wrap&#x2F;
+│   ├── graph_wrap.cpp
+│   ├── op_wrap.cpp
+│   ├── op_wrap.h
+│   └── tensor_wrap.cpp
+├── common&#x2F;
+│   ├── cask6_base.cpp              # CASK 6 = Blackwell
+│   ├── cask6_common.cpp
+│   ├── cask6_launched_shader.cpp
+│   ├── cask_base.cpp
+│   ├── cask_common.cpp
+│   ├── convolution_common.cpp
+│   ├── device_utils.cpp
+│   ├── myelin_binary.cpp
+│   ├── myelin_operation.cpp
+│   ├── myelin_session.cpp
+│   └── ...
+├── compiler&#x2F;
+│   ├── analysis&#x2F;
+│   │   ├── alias.cpp
+│   │   ├── dom.cpp
+│   │   ├── graph_io_alias.cpp
+│   │   ├── implicit_padding.cpp
+│   │   ├── l2_cache_management.cpp
+│   │   ├── loops.cpp
+│   │   ├── shape.cpp
+│   │   ├── ssa.cpp
+│   │   ├── tensorify.cpp
+│   │   ├── type.cpp
+│   │   └── verify.cpp
+│   ├── codegen&#x2F;
+│   │   ├── codegen.cpp
+│   │   ├── data.cpp
+│   │   └── ops.cpp
+│   ├── global_allocator&#x2F;
+│   │   ├── block_allocator.cpp
+│   │   ├── happens_before.cpp
+│   │   ├── interference_graph.cpp
+│   │   ├── list_allocator.cpp
+│   │   ├── live_analysis.cpp
+│   │   ├── live_interval.cpp
+│   │   ├── memory_allocator.cpp
+│   │   ├── overlap.cpp
+│   │   ├── region_allocator.cpp
+│   │   ├── reorder_ops_to_reduce_live_set.cpp
+│   │   └── tensor_allocator.cpp
+│   ├── ir&#x2F;
+│   │   ├── explicit_dds.cpp
+│   │   ├── multidef_map_t.cpp
+│   │   └── operation&#x2F;pointwise_op.cpp
+│   ├── ir_builder&#x2F;
+│   │   └── ir_sequence_builder.cpp
+│   ├── kernel_gen&#x2F;
+│   │   ├── align_stride_order.cpp
+│   │   ├── align_stride_order_heuristic.cpp
+│   │   ├── convert_move_to_transpose.cpp
+│   │   ├── dag.cpp
+│   │   ├── kernel_gen.cpp
+│   │   ├── kernel_gen_ds.cpp
+│   │   ├── kernel_gen_utils.cpp
+│   │   ├── kgen.cpp
+│   │   ├── kgen_prelim_transforms.cpp
+│   │   ├── knode.cpp
+│   │   ├── myl_fusion_heuristics.cpp
+│   │   ├── partition_dag.cpp
+│   │   ├── cuda_codegen&#x2F;
+│   │   │   ├── crd_computation.cpp
+│   │   │   ├── cuda_codegen.cpp           # 9000+ lines
+│   │   │   ├── cuda_codegen_fc.cpp
+│   │   │   ├── cuda_codegen_flash_decode.cpp
+│   │   │   ├── cuda_codegen_pattern.cpp
+│   │   │   ├── cuda_codegen_utils.cpp
+│   │   │   ├── cuda_compile.cpp
+│   │   │   ├── cuda_dynq_op.cpp
+│   │   │   ├── cuda_norm_op.cpp
+│   │   │   ├── cuda_reduce_op.cpp
+│   │   │   ├── cuda_tma_gnorm_op.cpp
+│   │   │   ├── generate_block_group_norm_kernel.cpp
+│   │   │   ├── generate_block_inst_norm_kernel.cpp
+│   │   │   ├── generate_cumsum_kernel.cpp
+│   │   │   ├── generate_dynq_kernel.cpp
+│   │   │   ├── generate_norm_kernel.cpp
+│   │   │   ├── generate_reduction_kernel.cpp
+│   │   │   ├── generate_tma_group_norm_kernel.cpp
+│   │   │   ├── nvcc_compile.cpp
+│   │   │   ├── nvrtc_compile.cpp
+│   │   │   ├── op_scheduler.cpp
+│   │   │   ├── permutation_utils.cpp
+│   │   │   ├── source_guard.cpp
+│   │   │   ├── stream_tile_size_solver.cpp
+│   │   │   ├── vectorizer.cpp
+│   │   │   └── xqa_codegen.cpp            # XQA = Cross-Query Attention
+│   │   ├── fusion_codegen&#x2F;
+│   │   │   ├── backbone_fuser.cpp
+│   │   │   ├── cask_codegen.cpp
+│   │   │   ├── fir_builder.cpp
+│   │   │   └── fusion_codegen.cpp
+│   │   └── mlir_codegen&#x2F;
+│   │       ├── cask6_api.cpp              # Blackwell API
+│   │       ├── collective_codegen.cpp
+│   │       ├── mlir_b2b_gemm_emitter.cpp  # Back-to-back GEMM
+│   │       ├── mlir_builder.cpp
+│   │       ├── mlir_codegen.cpp
+│   │       ├── mlir_codegen_utils.cpp
+│   │       ├── mlir_dual_gemm_emitter.cpp # Dual GEMM (MoE?)
+│   │       ├── mlir_emitter_base.hpp
+│   │       ├── mlir_epilogue_emitter.cpp
+│   │       ├── mlir_fusion_codegen.cpp
+│   │       ├── mlir_gemm_base_emitter.cpp
+│   │       ├── mlir_params.cpp
+│   │       ├── tile_aa_codegen.cpp        # TileAA codegen
+│   │       └── tile_aa_epilogue.cpp
+│   └── optimizer&#x2F;
+│       ├── autotuner.cpp
+│       ├── autotuner_cache.cpp
+│       ├── cache_model.cpp
+│       ├── canonicalize_ops.cpp
+│       ├── cask6_compile_utils.cpp
+│       ├── cask_compile_utils.cpp
+│       ├── cask_heuristics.cpp
+│       ├── cask_impl.cpp
+│       ├── cast_elimination.cpp
+│       ├── common_utils.cpp
+│       ├── const_ppg.cpp
+│       ├── conv_act_pool_fusion.cpp
+│       ├── conv_lowering.cpp
+│       ├── conv_w2c_transformation.cpp
+│       ├── copy_ppg.cpp
+│       ├── cost-model.cpp
+│       ├── create_shape_context.cpp
+│       ├── custom_layer_alias_io.cpp
+│       ├── custom_layer_internal_transform.cpp
+│       ├── dce.cpp
+│       ├── dds_output_scan_dim_to_transform.cpp
+│       ├── dds_output_size_tensors_t.cpp
+│       ├── decompose_composite_ops.cpp
+│       ├── deconv_lowering.cpp
+│       ├── dep_sep_fusion.cpp
+│       ├── einsum_helper.cpp
+│       ├── einsum_transformer.cpp
+│       ├── enable_batch_matmul.cpp
+│       ├── extract_reverse_iterator.cpp
+│       ├── fc_lowering.cpp
+│       ├── formats.cpp
+│       ├── formats_util.cpp
+│       ├── fusion_op_inliner.cpp
+│       ├── fusion_op_lowering.cpp
+│       ├── fusion_pipeline.cpp
+│       ├── fusion_rewrite.cpp
+│       ├── fusion_rewrite_utils.cpp
+│       ├── graph_jit.cpp
+│       ├── gvn&#x2F;gvn.cpp
+│       ├── gvn&#x2F;value_number_adv.cpp
+│       ├── gvn&#x2F;value_number_op_attrs.cpp
+│       ├── inline.cpp
+│       ├── inout_variant.cpp
+│       ├── instCombine.cpp
+│       ├── iv_lowering.cpp
+│       ├── kgen_cache.cpp
+│       ├── kqv_gemm_split.cpp             # K&#x2F;Q&#x2F;V GEMM splitting
+│       ├── kqv_gemm_split_utils.cpp
+│       ├── kvcache_update_lowering.cpp
+│       ├── l2tc_cost_model.cpp
+│       ├── l2tc_opt.cpp
+│       ├── l2tc_relations.cpp
+│       ├── l2tc_scheduler.cpp
+│       ├── l2tc_utils.cpp
+│       ├── layouts.cpp
+│       ├── lgtc_opt.cpp
+│       ├── lgtc_scheduler.cpp
+│       ├── linearize.cpp
+│       ├── loop_conv.cpp
+│       ├── loop_fusion.cpp
+│       ├── loop_unroll.cpp
+│       ├── lower_dds_scanout.cpp
+│       ├── lower_hwc_group_norm_op.cpp
+│       ├── lower_hwc_inst_norm_op.cpp
+│       ├── lower_inst_norm.cpp
+│       ├── lower_reduce.cpp
+│       ├── match_dual_gemm.cpp
+│       ├── match_gemv_mha.cpp             # GEMV MHA (decode phase)
+│       ├── match_group_norm.cpp
+│       ├── match_ragged_mha.cpp           # Ragged&#x2F;variable-length MHA
+│       ├── match_vertical_small_batched_gemm.cpp
+│       ├── memory_prop_ppg.cpp
+│       ├── merge_bbs.cpp
+│       ├── mha_fusion.cpp                 # MHA fusion
+│       ├── mha_matching_utils.cpp
+│       ├── mha_prologue_fusion.cpp        # MHA prologue fusion
+│       ├── mmdit_combine_modal.cpp
+│       ├── pattern_rewriter.cpp
+│       ├── peephole.cpp
+│       ├── peephole_epilogue_fusion.cpp
+│       ├── peephole_h_fusion_util.cpp
+│       ├── peephole_prologue_fusion.cpp
+│       ├── quantize_lowering.cpp
+│       ├── quantize_ppg.cpp
+│       ├── reduce_copy_fusion.cpp
+│       ├── reduce_fusion_base.cpp
+│       ├── refit.cpp
+│       ├── replace_empty_input_with_zeros.cpp
+│       ├── replicate_ppg.cpp
+│       ├── reset_elim.cpp
+│       ├── reshape_mapping.cpp
+│       ├── reshape_ppg_1d_conv.cpp
+│       ├── reshape_ppg.cpp
+│       ├── resize_lowering.cpp
+│       ├── scan_fusion.cpp
+│       ├── sequence_lowering.cpp
+│       ├── shape_call_lowering.cpp
+│       ├── shape_graph_opt.cpp
+│       ├── simplify_attention_op.cpp      # Attention simplification
+│       ├── slice_fill_conv_fusion.cpp
+│       ├── slice_fusion.cpp
+│       ├── slice_lowering.cpp
+│       ├── speed_of_light.cpp
+│       ├── split_slice_elim.cpp
+│       ├── stream_sched.cpp
+│       ├── subgraph_rewriter.cpp
+│       ├── symbolic_global_padding.cpp
+│       ├── symbolic_global_padding_impl.cpp
+│       ├── synthesize_inst.cpp
+│       ├── tactic.cpp
+│       ├── tactics_tiled_layout.cpp
+│       ├── transform_batch_matmul.cpp
+│       ├── transform_multi_batch.cpp
+│       ├── transpose_fusion.cpp
+│       ├── transpose_ppg.cpp
+│       ├── tunable_graph.cpp
+│       └── wrap_attention_op_in_kgen.cpp  # Wrap attention in kgen
+└── executor&#x2F;
+    ├── analysis&#x2F;user-buffer.cpp
+    └── instruction&#x2F;cask_fusion.cpp
+```<p>*Total: 576 source file paths leaked*<p>---</div><br/><div id="47070881" class="c"><input type="checkbox" id="c-47070881" checked=""/><div class="controls bullet"><span class="by">benreesman</span><span>|</span><a href="#47070839">parent</a><span>|</span><label class="collapse" for="c-47070881">[-]</label><label class="expand" for="c-47070881">[1 more]</label></div><br/><div class="children"><div class="content">Call fucking strings on a BSD wheel. If I can do this? The PRC did a long time ago.</div><br/></div></div></div></div></div></div></div></div></div></body></html>
